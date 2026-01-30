@@ -1,0 +1,40 @@
+[project]
+name = "dabs-template"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["datagen"]
+
+# ---------------------------------------------
+# uv workspace configuration
+# This makes all packages/* installable together
+# ---------------------------------------------
+[tool.uv.workspace]
+members = [
+  "packages/*",
+]
+
+# -------------------------------
+# Specify source packages that are workspace-managed
+# -------------------------------
+[tool.uv.sources]
+datagen = { workspace = true }
+
+# ---------------------------------------------
+# Dev-only dependencies shared across repo
+# ---------------------------------------------
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "ruff",
+    "mypy",
+]
+
+# ---------------------------------------------
+# pytest global configuration
+# ---------------------------------------------
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
