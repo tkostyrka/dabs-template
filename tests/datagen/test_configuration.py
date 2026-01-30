@@ -1,3 +1,13 @@
+"""
+Unit tests for Column and Entity schema validation classes.
+
+These tests verify:
+- Column initialization rules
+- Numeric range constraints
+- Duplicate column handling in Entity
+- Row-level validation logic
+"""
+
 import pytest
 from datagen.configuration import Column, Entity
 
