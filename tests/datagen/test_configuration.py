@@ -31,11 +31,11 @@ def test_column_numeric_pass():
 def test_column_non_numeric_value_range_fails():
     with pytest.raises(ValueError, match="value_range can only be used with numeric types"):
         Column(name="name", dtype=str, value_range=(0, 100))
-        
+
 def test_column_value_range_min_greater_than_max_fails():
     with pytest.raises(ValueError, match="min cannot be greater than max"):
         Column(name="score", dtype=int, value_range=(100, 0))
-        
+
 def test_entity_creation_with_unique_columns():
     cols = [
         Column(name="id", dtype=int, nullable=False),

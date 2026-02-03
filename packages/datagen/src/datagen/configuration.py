@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List, Dict, Any, Tuple, Optional
 
+
 @dataclass
 class Column:
     name: str
@@ -14,7 +15,9 @@ class Column:
 
         # Check value_range is only for numeric types
         if self.value_range is not None and not issubclass(self.dtype, numeric_types):
-            raise ValueError(f"value_range can only be used with numeric types (int, float), got {self.dtype}")
+            raise ValueError(
+                f"value_range can only be used with numeric types (int, float), got {self.dtype}"
+            )
 
         # Validate value_range tuple
         if self.value_range:
@@ -29,13 +32,15 @@ class Column:
             return False
         if self.value_range:
             min_val, max_val = self.value_range
-            if not (min_val <= value <= max_val):
+            value_numeric = float(value)
+            if not (min_val <= value_numeric <= max_val):
                 return False
         if self.allowed_values:
             if value not in self.allowed_values:
                 return False
         return True
-      
+
+
 @dataclass
 class Entity:
     name: str
@@ -53,11 +58,13 @@ class Entity:
 
     def add_column(self, column: Column):
         if column.name in self._columns_dict:
-            raise ValueError(f"Column with name '{column.name}' already exists in entity '{self.name}'.")
+            raise ValueError(
+                f"Column with name '{column.name}' already exists in entity '{self.name}'."
+            )
         self.columns.append(column)
         self._columns_dict[column.name] = column
 
-    def get_column(self, name: str) -> Column:
+    def get_column(self, name: str) -> Column | None:
         return self._columns_dict.get(name)
 
     def validate_row(self, row: dict) -> bool:
