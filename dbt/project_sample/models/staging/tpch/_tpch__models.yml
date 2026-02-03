@@ -1,0 +1,43 @@
+version: 2
+
+models:
+  - name: stg_tpch__customer
+    description: "This model renames and transforms customer data for staging."
+    materialized: view
+    schema: staging
+    enabled: true
+
+  - name: stg_tpch__lineitem
+    materialized: view
+    schema: staging
+    enabled: true
+
+  - name: stg_tpch__nation
+    materialized: view
+    schema: staging
+    enabled: true
+
+  - name: stg_tpch__orders
+    materialized: view
+    schema: staging
+    enabled: true
+
+  - name: stg_tpch__part
+    materialized: view
+    schema: staging
+    enabled: true
+
+  - name: stg_tpch__partsupp
+    materialized: view
+    schema: staging
+    enabled: true
+
+  - name: stg_tpch__region
+    materialized: view
+    schema: staging
+    enabled: true
+
+  - name: stg_tpch__supplier
+    materialized: view
+    schema: staging
+    enabled: true

@@ -1,0 +1,19 @@
+# update following:
+#
+# project_sample
+# catalog
+# schema
+# http_path
+# host
+
+# project_sample:
+   target: dev
+   outputs:
+    dev:
+      type: databricks
+      method: http
+      # catalog: xxx
+      # schema: xxx
+      # http_path: /sql/1.0/warehouses/xxx
+      # host: https://adb-xxx.x.azuredatabricks.net/
+      auth_type: oauth

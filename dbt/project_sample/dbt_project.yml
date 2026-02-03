@@ -1,0 +1,55 @@
+name: project_sample
+version: 1.0.0
+config-version: 2
+
+profile: project_sample
+
+flags:
+  use_materialization_v2: true
+  use_managed_iceberg: true
+
+model-paths: ["models"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+
+clean-targets:
+  - target
+  - dbt_packages
+
+vars:
+  source_database: xxx
+
+# sources:
+#   project_name:
+#     staging:
+#       wellview:
+#         wellview_bronze:
+#           +loaded_at_field: _dap_load_ts
+#           +freshness:
+#             warn_after:
+#               count: 24
+#               period: hour
+#             error_after:
+#               count: 48
+#               period: hour
+
+# seeds:
+#   project_name:
+#     +persist_docs:
+#       relation: true
+#       columns: true
+#     sample:
+#       +schema: sample
+
+# models:
+#   project_name:
+#     +persist_docs:
+#       relation: true
+#       columns: true
+#     gold:
+#       +schema: gold
+#       +access: public
+#       +materialized: table
+#       sample:
+#         +schema: sample
