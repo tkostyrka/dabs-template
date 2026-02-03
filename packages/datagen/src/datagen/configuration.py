@@ -32,6 +32,8 @@ class Column:
             return False
         if self.value_range:
             min_val, max_val = self.value_range
+            if not isinstance(value, (int, float)):
+                return False
             value_numeric = float(value)
             if not (min_val <= value_numeric <= max_val):
                 return False
