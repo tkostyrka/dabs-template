@@ -7,6 +7,12 @@ repos:
         language: system
         types: [python]
 
+      - id: pydocstyle
+        name: pydocstyle (uv)
+        entry: uv run pydocstyle packages\datagen
+        language: system
+        types: [python]
+
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.14.14
     hooks:

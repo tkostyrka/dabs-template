@@ -16,3 +16,5 @@ uv run pre-commit run --all-files
 
 # ruff
 uv add --dev ruff
+
+# mypy

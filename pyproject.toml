@@ -37,26 +37,25 @@ dev = [
     "mkdocs-literate-nav>=0.6.2",
     "mkdocs-section-index>=0.3.10",
     "pre-commit>=4.5.1",
+    "pydocstyle>=6.3.0",
 ]
 
 # ---------------------------------------------
-# pytest configuration
+# tools
 # ---------------------------------------------
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra"
 
-# ---------------------------------------------
-# ruff configuration
-# ---------------------------------------------
 [tool.ruff]
 line-length = 100
 
-# ---------------------------------------------
-# mypy configuration
-# ---------------------------------------------
 [tool.mypy]
 mypy_path = [
     "packages/datagen/src"
 ]
 explicit_package_bases = true
+
+[tool.pydocstyle]
+convention = "numpy"
+add-ignore = ["D104"]  # ignore missing docstring in package __init__.py

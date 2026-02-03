@@ -1,9 +1,28 @@
+"""Placeholder docstring for datagen.configuration module."""
+
 from dataclasses import dataclass, field
 from typing import List, Dict, Any, Tuple, Optional
 
 
 @dataclass
 class Column:
+    """
+    Placeholder docstring for Column class.
+
+    Parameters
+    ----------
+    name : str
+        Column name.
+    dtype : type
+        Data type of the column.
+    value_range : Optional[Tuple[float, float]], optional
+        Minimum and maximum allowed values (numeric types only), by default None.
+    allowed_values : List[Any], optional
+        Explicitly allowed values, by default empty list.
+    nullable : bool, optional
+        Whether None is allowed, by default True.
+    """
+
     name: str
     dtype: type
     value_range: Optional[Tuple[float, float]] = None
@@ -11,6 +30,14 @@ class Column:
     nullable: bool = True
 
     def __post_init__(self):
+        """
+        Post-initialization checks for Column.
+
+        Raises
+        ------
+        ValueError
+            If value_range is set for non-numeric dtype or min > max.
+        """
         numeric_types = (int, float)
 
         # Check value_range is only for numeric types
@@ -26,6 +53,19 @@ class Column:
                 raise ValueError(f"value_range min cannot be greater than max: {self.value_range}")
 
     def validate(self, value: Any) -> bool:
+        """
+        Validate a value against this column's rules.
+
+        Parameters
+        ----------
+        value : Any
+            The value to validate.
+
+        Returns
+        -------
+        bool
+            True if value is valid, False otherwise.
+        """
         if value is None:
             return self.nullable
         if not isinstance(value, self.dtype):
@@ -45,10 +85,29 @@ class Column:
 
 @dataclass
 class Entity:
+    """
+    Placeholder docstring for Entity class.
+
+    Parameters
+    ----------
+    name : str
+        Name of the entity.
+    columns : List[Column], optional
+        List of columns in the entity, by default empty list.
+    """
+
     name: str
     columns: List[Column] = field(default_factory=list)
 
     def __post_init__(self):
+        """
+        Post-initialization checks for Entity.
+
+        Raises
+        ------
+        ValueError
+            If duplicate column names are found.
+        """
         # Check for duplicate column names
         names = [col.name for col in self.columns]
         if len(names) != len(set(names)):
@@ -59,6 +118,19 @@ class Entity:
         self._columns_dict: Dict[str, Column] = {col.name: col for col in self.columns}
 
     def add_column(self, column: Column):
+        """
+        Add a new column to the entity.
+
+        Parameters
+        ----------
+        column : Column
+            Column to add.
+
+        Raises
+        ------
+        ValueError
+            If a column with the same name already exists.
+        """
         if column.name in self._columns_dict:
             raise ValueError(
                 f"Column with name '{column.name}' already exists in entity '{self.name}'."
@@ -67,12 +139,34 @@ class Entity:
         self._columns_dict[column.name] = column
 
     def get_column(self, name: str) -> Column | None:
+        """
+        Retrieve a column by name.
+
+        Parameters
+        ----------
+        name : str
+            Name of the column.
+
+        Returns
+        -------
+        Column or None
+            The column object if found, otherwise None.
+        """
         return self._columns_dict.get(name)
 
     def validate_row(self, row: dict) -> bool:
         """
         Validate a dictionary representing a row against all column constraints.
-        Returns True if all columns are valid.
+
+        Parameters
+        ----------
+        row : dict
+            Dictionary mapping column names to values.
+
+        Returns
+        -------
+        bool
+            True if all columns in the row are valid, False otherwise.
         """
         for col in self.columns:
             if col.name not in row:

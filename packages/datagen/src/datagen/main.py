@@ -1,4 +1,8 @@
+"""Placeholder docstring."""
+
+
 def main():
+    """Print a greeting message from the datagen module."""
     print("Hello from datagen!")
 
 
