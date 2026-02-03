@@ -59,3 +59,4 @@ explicit_package_bases = true
 [tool.pydocstyle]
 convention = "numpy"
 add-ignore = ["D104"]  # ignore missing docstring in package __init__.py
+match-dir = "^packages/[^/]+/src"

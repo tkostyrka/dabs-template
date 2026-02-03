@@ -9,7 +9,7 @@ repos:
 
       - id: pydocstyle
         name: pydocstyle (uv)
-        entry: uv run pydocstyle packages\datagen
+        entry: uv run pydocstyle
         language: system
         types: [python]
 
