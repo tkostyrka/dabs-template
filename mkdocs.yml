@@ -14,4 +14,4 @@ plugins:
 - mkdocstrings
 nav:
 - home: index.md
-- api: reference/
+- packages: reference/
