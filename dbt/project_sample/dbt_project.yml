@@ -20,36 +20,33 @@ clean-targets:
 vars:
   source_database: xxx
 
-# sources:
-#   project_name:
-#     staging:
-#       wellview:
-#         wellview_bronze:
-#           +loaded_at_field: _dap_load_ts
-#           +freshness:
-#             warn_after:
-#               count: 24
-#               period: hour
-#             error_after:
-#               count: 48
-#               period: hour
+seeds:
+  project_sample:
+    +persist_docs:
+      relation: true
+      columns: true
+    metadata:
+      +schema: sample
 
-# seeds:
-#   project_name:
-#     +persist_docs:
-#       relation: true
-#       columns: true
-#     sample:
-#       +schema: sample
+models:
+  project_sample:
+    +persist_docs:
+      relation: true
+      columns: true
+    staging:
+      tpch:
+        +schema: staging
+        # +loaded_at_field: _dap_load_ts
+        # +freshness:
+        #   warn_after:
+        #     count: 24
+        #     period: hour
+        #   error_after:
+        #     count: 48
+        #     period: hour
 
-# models:
-#   project_name:
-#     +persist_docs:
-#       relation: true
-#       columns: true
-#     gold:
-#       +schema: gold
-#       +access: public
-#       +materialized: table
-#       sample:
-#         +schema: sample
+    reports:
+      +schema: reports
+      +access: public
+      tpch:
+        +materialized: table

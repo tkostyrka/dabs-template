@@ -24,20 +24,23 @@ sources:
             description: "Nation identifier"
             data_tests:
               - relationships:
-                  to: source('tpch', 'nation')
-                  field: n_nationkey
+                  arguments:
+                    to: source('tpch', 'nation')
+                    field: n_nationkey
           - name: c_phone
             description: "Customer phone number"
             data_tests:
               - string_matches_format:
-                  regex_pattern: '[1-3]\\d{1}-\\d{3}-\\d{3}-\\d{4}'
+                  arguments:
+                    regex_pattern: '[1-3]\\d{1}-\\d{3}-\\d{3}-\\d{4}'
           - name: c_acctbal
             description: "Account balance"
           - name: c_mktsegment
             description: "Market segment"
             data_tests:
               - accepted_values:
-                  values: ['BUILDING', 'MACHINERY', 'HOUSEHOLD', 'AUTOMOBILE', 'FURNITURE']
+                  arguments:
+                    values: ['BUILDING', 'MACHINERY', 'HOUSEHOLD', 'AUTOMOBILE', 'FURNITURE']
           - name: c_comment
             description: "Comment or remarks"
 
@@ -68,7 +71,8 @@ sources:
             description: "Return flag"
             data_tests:
               - accepted_values:
-                  values: ['R', 'N', 'A']
+                  arguments:
+                    values: ['R', 'N', 'A']
           - name: l_linestatus
             description: "Line status"
           - name: l_shipdate
@@ -100,8 +104,9 @@ sources:
             description: "Region identifier"
             data_tests:
               - relationships:
-                  to: source('tpch', 'region')
-                  field: r_regionkey
+                  arguments:
+                    to: source('tpch', 'region')
+                    field: r_regionkey
           - name: n_comment
             description: "Comment or remarks"
 
@@ -117,13 +122,15 @@ sources:
             description: "Customer identifier"
             data_tests:
               - relationships:
-                  to: source('tpch', 'customer')
-                  field: c_custkey
+                  arguments:
+                    to: source('tpch', 'customer')
+                    field: c_custkey
           - name: o_orderstatus
             description: "Order status"
             data_tests:
               - accepted_values:
-                  values: ['O', 'F', 'P']
+                  arguments:
+                    values: ['O', 'F', 'P']
           - name: o_totalprice
             description: "Total price"
             data_tests:
@@ -134,7 +141,8 @@ sources:
             description: "Order priority"
             data_tests:
               - accepted_values:
-                  values: ['1-URGENT', '2-HIGH', '3-MEDIUM', '4-NOT SPECIFIED', '5-LOW']
+                  arguments:
+                    values: ['1-URGENT', '2-HIGH', '3-MEDIUM', '4-NOT SPECIFIED', '5-LOW']
           - name: o_clerk
             description: "Clerk identifier"
           - name: o_shippriority
@@ -182,8 +190,9 @@ sources:
             description: "Supplier identifier"
             data_tests:
               - relationships:
-                  to: source('tpch', 'supplier')
-                  field: s_suppkey
+                  arguments:
+                    to: source('tpch', 'supplier')
+                    field: s_suppkey
           - name: ps_availqty
             description: "Available quantity"
             data_tests:
@@ -228,13 +237,15 @@ sources:
             description: "Nation identifier"
             data_tests:
               - relationships:
-                  to: source('tpch', 'nation')
-                  field: n_nationkey
+                  arguments:
+                    to: source('tpch', 'nation')
+                    field: n_nationkey
           - name: s_phone
             description: "Supplier phone number"
             data_tests:
               - string_matches_format:
-                  regex_pattern: '[1-3]\\d{1}-\\d{3}-\\d{3}-\\d{4}'
+                  arguments:
+                    regex_pattern: '[1-3]\\d{1}-\\d{3}-\\d{3}-\\d{4}'
           - name: s_acctbal
             description: "Account balance"
           - name: s_comment

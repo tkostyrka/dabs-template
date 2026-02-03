@@ -1,0 +1,26 @@
+nation_name,nation_group,currency,iso_code,is_in_eu,notes
+ALGERIA,North Africa,DZD,DZ,false,Oil-rich economy
+ARGENTINA,South America,ARS,AR,false,High inflation
+BRAZIL,South America,BRL,BR,false,Largest LATAM market
+CANADA,North America,CAD,CA,true,Stable political climate
+EGYPT,North Africa,EGP,EG,false,Key regional hub
+ETHIOPIA,East Africa,ETB,ET,false,Growing telecom sector
+FRANCE,Western Europe,EUR,FR,true,EU member
+GERMANY,Western Europe,EUR,DE,true,EU economic leader
+INDIA,South Asia,INR,IN,false,Large tech workforce
+INDONESIA,Southeast Asia,IDR,ID,false,Strong digital growth
+IRAN,Middle East,IRR,IR,false,Sanctioned market
+IRAQ,Middle East,IQD,IQ,false,Post-conflict rebuilding
+JAPAN,East Asia,JPY,JP,false,Technological leader
+JORDAN,Middle East,JOD,JO,false,Stable in volatile region
+KENYA,East Africa,KES,KE,false,Fintech innovation leader
+MOROCCO,North Africa,MAD,MA,false,Tourism potential
+MOZAMBIQUE,Southern Africa,MZN,MZ,false,Infrastructure investment
+PERU,South America,PEN,PE,false,Mining-focused
+CHINA,East Asia,CNY,CN,false,Global supply chain hub
+ROMANIA,Eastern Europe,RON,RO,true,EU expansion state
+RUSSIA,Eastern Europe,RUB,RU,false,High geopolitical risk
+SAUDI ARABIA,Middle East,SAR,SA,false,Oil-dependent economy
+VIETNAM,Southeast Asia,VND,VN,false,Manufacturing shift
+UNITED KINGDOM,Western Europe,GBP,GB,false,Brexit aftermath
+UNIT STATES,North America,USD,US,true,Core market

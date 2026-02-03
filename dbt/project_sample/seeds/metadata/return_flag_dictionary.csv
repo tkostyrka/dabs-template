@@ -1,0 +1,4 @@
+return_flag,description,is_return
+A,Return was requested,true
+N,No return,false
+R,Item returned,true

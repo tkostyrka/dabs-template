@@ -1,0 +1,6 @@
+region_name,region_type,region_code,has_operations,notes
+AFRICA,international,AF,true,Emerging market
+AMERICA,domestic,AM,true,Primary market
+ASIA,international,AS,false,Future expansion
+EUROPE,domestic,EU,true,Strategic partner region
+MIDDLE EAST,international,ME,false,Limited activity

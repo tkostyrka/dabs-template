@@ -1,3 +1,9 @@
+{{ config(
+    materialized='view',
+    enabled=true
+) }}
+
+
 with source as (
 
     select *

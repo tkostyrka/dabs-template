@@ -1,0 +1,4 @@
+order_status,description
+O,Open
+F,Filled
+P,Partially filled

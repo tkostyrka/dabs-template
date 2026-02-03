@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: q01_pricing_summary_report
+  - name: pricing_summary_report
     description: '{{ doc("pricing_summary_report") }}'
     columns:
       - name: return_flag
@@ -25,7 +25,7 @@ models:
       - name: count_order
         description: "Number of line items included in the summary group."
 
-  - name: q02_minimum_cost_supplier
+  - name: minimum_cost_supplier
     description: '{{ doc("minimum_cost_supplier") }}'
     columns:
       - name: account_balance
@@ -45,7 +45,7 @@ models:
       - name: comment
         description: "Free-form comment field associated with the supplier."
 
-  - name: q03_shipping_priority
+  - name: shipping_priority
     description: >
       TPC-H Query 3 - Shipping Priority Query. Calculates the revenue generated per order by
       summing discounted line item prices and groups by order date and shipping priority.
@@ -60,7 +60,7 @@ models:
       - name: ship_priority
         description: "Shipping priority code assigned to the order."
 
-  - name: q08_national_market_share
+  - name: national_market_share
     description: >
       TPC-H Query 8 - National Market Share Query. This query calculates the market share
       for each nation based on sales volume per order year. The volume is computed as the
