@@ -1,0 +1,52 @@
+name: sample_project
+version: 1.0.0
+config-version: 2
+
+profile: sample_project
+
+flags:
+  use_materialization_v2: true
+  use_managed_iceberg: true
+
+model-paths: ["models"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+
+clean-targets:
+  - target
+  - dbt_packages
+
+vars:
+  source_database: xxx
+
+seeds:
+  sample_project:
+    +persist_docs:
+      relation: true
+      columns: true
+    metadata:
+      +schema: sample
+
+models:
+  sample_project:
+    +persist_docs:
+      relation: true
+      columns: true
+    staging:
+      tpch:
+        +schema: staging
+        # +loaded_at_field: _dap_load_ts
+        # +freshness:
+        #   warn_after:
+        #     count: 24
+        #     period: hour
+        #   error_after:
+        #     count: 48
+        #     period: hour
+
+    reports:
+      +schema: reports
+      +access: public
+      tpch:
+        +materialized: table

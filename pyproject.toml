@@ -1,0 +1,77 @@
+[project]
+name = "dabs-template"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "datagen",
+    "dbt-databricks>=1.11.4",
+]
+
+# ---------------------------------------------
+# uv workspace configuration
+# This makes all packages/* installable together
+# ---------------------------------------------
+[tool.uv.workspace]
+members = [
+  "packages/*",
+]
+
+# -------------------------------
+# Specify source packages that are workspace-managed
+# -------------------------------
+[tool.uv.sources]
+datagen = { workspace = true }
+
+# ---------------------------------------------
+# Dev-only dependencies shared across repo
+# ---------------------------------------------
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "ruff",
+    "mypy",
+    "mkdocs>=1.6.1",
+    "mkdocstrings[python]>=1.0.2",
+    "mkdocs-material>=9.7.1",
+    "mkdocs-gen-files>=0.6.0",
+    "mkdocs-literate-nav>=0.6.2",
+    "mkdocs-section-index>=0.3.10",
+    "pre-commit>=4.5.1",
+    "sqlfluff>=4.0.0",
+    "sqlfluff-templater-dbt>=4.0.0",
+]
+
+# ---------------------------------------------
+# tools
+# ---------------------------------------------
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+# ---------------------------------------------
+# ruff
+# ---------------------------------------------
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "D"]
+ignore = ["D104"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+# ---------------------------------------------
+# mypy
+# ---------------------------------------------
+[tool.mypy]
+files = ["packages/"]
+check_untyped_defs = true
+disallow_untyped_defs = true
+explicit_package_bases = true
+mypy_path = [
+    "packages/datagen/src"
+]

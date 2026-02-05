@@ -1,0 +1,77 @@
+version: 2
+
+models:
+  - name: pricing_summary_report
+    description: '{{ doc("pricing_summary_report") }}'
+    columns:
+      - name: return_flag
+        description: "Indicates whether a returned item is part of the order (e.g., 'R' for returned)."
+      - name: line_status
+        description: "Status of the order line (e.g., 'O' for open, 'F' for filled)."
+      - name: sum_qty
+        description: "Total quantity of items ordered for the given return_flag and line_status."
+      - name: sum_base_price
+        description: "Sum of the extended price (base sales amount) before discount."
+      - name: sum_disc_price
+        description: "Sum of the price after discount (i.e., extended_price * (1 - discount))."
+      - name: sum_charge
+        description: "Sum of the total charge (discounted price * (1 + tax))."
+      - name: avg_qty
+        description: "Average quantity per line item."
+      - name: avg_price
+        description: "Average extended price per line item."
+      - name: avg_disc
+        description: "Average discount applied per line item."
+      - name: count_order
+        description: "Number of line items included in the summary group."
+
+  - name: minimum_cost_supplier
+    description: '{{ doc("minimum_cost_supplier") }}'
+    columns:
+      - name: account_balance
+        description: "Current balance for the supplier's account."
+      - name: supplier_name
+        description: "Name of the supplier offering the part at minimum supply cost."
+      - name: nation_name
+        description: "Name of the nation the supplier is located in."
+      - name: part_id
+        description: "Unique identifier for the part being offered."
+      - name: manufacturer
+        description: "Manufacturer of the part."
+      - name: address
+        description: "Address of the supplier."
+      - name: phone_number
+        description: "Phone number of the supplier."
+      - name: comment
+        description: "Free-form comment field associated with the supplier."
+
+  - name: shipping_priority
+    description: >
+      TPC-H Query 3 - Shipping Priority Query. Calculates the revenue generated per order by
+      summing discounted line item prices and groups by order date and shipping priority.
+      Useful for analyzing customer demand and shipping prioritization.
+    columns:
+      - name: order_id
+        description: "Unique identifier of the order."
+      - name: revenue
+        description: "Total revenue for the order calculated as SUM(extended_price * (1 - discount))."
+      - name: order_date
+        description: "The date the order was placed."
+      - name: ship_priority
+        description: "Shipping priority code assigned to the order."
+
+  - name: national_market_share
+    description: >
+      TPC-H Query 8 - National Market Share Query. This query calculates the market share
+      for each nation based on sales volume per order year. The volume is computed as the
+      extended price (after discount) of line items, and the market share is derived
+      by dividing a nation's volume by the total volume for the year.
+    columns:
+      - name: nation
+        description: "Name of the nation for which the market share is calculated."
+      - name: order_year
+        description: "Year of the order, extracted from the order date."
+      - name: volume
+        description: "Total sales volume (sum of extended price after discount) for the nation in the given year."
+      - name: market_share
+        description: "The nation's sales volume divided by the total volume for the year, representing the market share."

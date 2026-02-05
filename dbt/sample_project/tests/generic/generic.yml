@@ -1,0 +1,8 @@
+version: 2
+tests:
+  - name: greater_than_zero
+    description: >
+      The test is designed to validate that the values in the specified column should not be less than or equal to zero.
+  - name: string_matches_format
+    description: >
+      The test is designed to validate that the values in the specified column should match a specific format.

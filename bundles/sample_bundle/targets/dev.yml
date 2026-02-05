@@ -1,0 +1,14 @@
+targets:
+  dev:
+    mode: development
+    default: true
+    presets:
+      tags:
+        environment: ${bundle.target}
+    workspace:
+      host: https://dbc-22d1cc79-2974.cloud.databricks.com/
+    permissions:
+      - user_name: ${workspace.current_user.userName}
+        level: CAN_MANAGE
+    variables:
+      default_catalog: sample_dev

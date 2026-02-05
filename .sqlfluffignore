@@ -1,0 +1,4 @@
+# dbt artefacts everywhere
+dbt_packages/
+logs/
+target/

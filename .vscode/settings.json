@@ -1,0 +1,15 @@
+{
+  "files.associations": {
+    "*.sqlfluff": "ignore",
+    "**/.gitkeep": "markdown"
+  },
+  "files.exclude": {
+    ".mypy_cache": true,
+    ".ruff_cache": true,
+    ".pytest_cache": true,
+    "dist": true,
+
+    "**/*.egg-info": true,
+    "**/__pycache__": true,
+  }
+}

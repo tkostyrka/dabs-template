@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: stg_tpch__customer
+    description: "This model renames and transforms customer data for staging."
+  - name: stg_tpch__lineitem
+  - name: stg_tpch__nation
+  - name: stg_tpch__orders
+  - name: stg_tpch__part
+  - name: stg_tpch__partsupp
+  - name: stg_tpch__region
+  - name: stg_tpch__supplier

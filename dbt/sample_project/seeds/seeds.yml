@@ -1,0 +1,61 @@
+version: 2
+
+seeds:
+  - name: nation_metadata
+    description: "Nation data including names, groups, currencies, and notes."
+    columns:
+      - name: nation_name
+        description: "Name of the nation."
+        data_tests:
+          - not_null
+          - unique
+      - name: nation_group
+        description: "Geopolitical or regional group the nation belongs to."
+      - name: currency
+        description: "Official currency used in the nation."
+      - name: iso_code
+        description: "Two-letter ISO code representing the nation."
+      - name: is_in_eu
+        description: "Indicates whether the nation is a member of the European Union."
+      - name: notes
+        description: "Additional contextual or economic information about the nation."
+
+  - name: region_metadata
+    description: "Region data including region names, types, codes, and notes."
+    columns:
+      - name: region_name
+        description: "Name of the region."
+        data_tests:
+          - not_null
+          - unique
+      - name: region_type
+        description: "Type of the region (e.g., international, domestic)."
+      - name: region_code
+        description: "Code associated with the region."
+      - name: has_operations
+        description: "Indicates if the region has operations (true/false)."
+      - name: notes
+        description: "Additional notes regarding the region."
+
+  - name: return_flag_dictionary
+    description: "Return flag data including return statuses and descriptions."
+    columns:
+      - name: return_flag
+        description: "Code representing the return status."
+        data_tests:
+          - not_null
+          - unique
+      - name: description
+        description: "Textual explanation of the return status."
+      - name: is_return
+        description: "Boolean indicating if the status involves a return."
+
+  - name: order_status_metadata
+    description: >
+      A lookup table for order status codes used in the TPCH `orders` table.
+      This seed provides human-readable descriptions for each status to enrich reporting and modeling.
+    columns:
+      - name: order_status
+        description: "The one-letter status code representing the order state (e.g., O for Open)."
+      - name: description
+        description: "A human-readable explanation of the order status code."
