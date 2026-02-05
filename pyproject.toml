@@ -56,10 +56,13 @@ addopts = "-ra"
 line-length = 100
 
 [tool.mypy]
+files = ["packages/"]
+check_untyped_defs = true
+disallow_untyped_defs = true
+explicit_package_bases = true
 mypy_path = [
     "packages/datagen/src"
 ]
-explicit_package_bases = true
 
 [tool.pydocstyle]
 convention = "numpy"

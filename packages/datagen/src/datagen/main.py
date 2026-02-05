@@ -1,7 +1,7 @@
 """Placeholder docstring."""
 
 
-def main():
+def main() -> None:
     """Print a greeting message from the datagen module."""
     print("Hello from datagen!")
 

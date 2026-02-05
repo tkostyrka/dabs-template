@@ -29,7 +29,7 @@ class Column:
     allowed_values: List[Any] = field(default_factory=list)
     nullable: bool = True
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """
         Post-initialization checks for Column.
 
@@ -99,7 +99,7 @@ class Entity:
     name: str
     columns: List[Column] = field(default_factory=list)
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """
         Post-initialization checks for Entity.
 
@@ -117,7 +117,7 @@ class Entity:
         # Store columns as a dictionary for quick access
         self._columns_dict: Dict[str, Column] = {col.name: col for col in self.columns}
 
-    def add_column(self, column: Column):
+    def add_column(self, column: Column) -> None:
         """
         Add a new column to the entity.
 

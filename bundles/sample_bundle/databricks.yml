@@ -1,0 +1,8 @@
+bundle:
+  name: sample_bundle
+  uuid: afaac4a7-fb68-48ce-a82b-8c8c5e7b9c09
+
+include:
+  - resources/*.y*ml
+  - targets/*.y*ml
+  - variables.y*ml

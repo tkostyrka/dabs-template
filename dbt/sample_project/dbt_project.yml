@@ -1,8 +1,8 @@
-name: project_sample
+name: sample_project
 version: 1.0.0
 config-version: 2
 
-profile: project_sample
+profile: sample_project
 
 flags:
   use_materialization_v2: true
@@ -21,7 +21,7 @@ vars:
   source_database: xxx
 
 seeds:
-  project_sample:
+  sample_project:
     +persist_docs:
       relation: true
       columns: true
@@ -29,7 +29,7 @@ seeds:
       +schema: sample
 
 models:
-  project_sample:
+  sample_project:
     +persist_docs:
       relation: true
       columns: true
