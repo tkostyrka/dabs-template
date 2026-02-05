@@ -6,7 +6,7 @@ targets:
         environment: ${bundle.target}
     workspace:
       host: https://dbc-22d1cc79-2974.cloud.databricks.com/
-      root_path: /bundles/${bundle.target}/${bundle.name}
+      root_path: /bundles/${bundle.name}/${bundle.target}
     run_as:
       service_principal_name: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
     permissions:
