@@ -4,28 +4,28 @@
 ) }}
 
 
-with source as (
+WITH source AS (
 
-    select *
-    from {{ source('tpch', 'orders') }}
+    SELECT *
+    FROM {{ source('tpch', 'orders') }}
 
 ),
 
-renamed as (
+renamed AS (
 
-    select
-        o_orderkey as order_id,
-        o_custkey as customer_id,
-        o_orderstatus as order_status,
-        o_totalprice as total_price,
-        o_orderdate as order_date,
-        o_orderpriority as order_priority,
-        o_clerk as clerk_name,
-        o_shippriority as ship_priority,
-        o_comment as comment
+    SELECT
+        o_orderkey AS order_id,
+        o_custkey AS customer_id,
+        o_orderstatus AS order_status,
+        o_totalprice AS total_price,
+        o_orderdate AS order_date,
+        o_orderpriority AS order_priority,
+        o_clerk AS clerk_name,
+        o_shippriority AS ship_priority,
+        o_comment AS comment
 
-    from source
+    FROM source
 
 )
 
-select * from renamed
+SELECT * FROM renamed

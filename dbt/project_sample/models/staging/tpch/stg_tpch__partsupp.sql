@@ -4,24 +4,24 @@
 ) }}
 
 
-with source as (
+WITH source AS (
 
-    select *
-    from {{ source('tpch', 'partsupp') }}
+    SELECT *
+    FROM {{ source('tpch', 'partsupp') }}
 
 ),
 
-renamed as (
+renamed AS (
 
-    select
-        ps_partkey as part_id,
-        ps_suppkey as supplier_id,
-        ps_availqty as available_quantity,
-        ps_supplycost as supply_cost,
-        ps_comment as comment
+    SELECT
+        ps_partkey AS part_id,
+        ps_suppkey AS supplier_id,
+        ps_availqty AS available_quantity,
+        ps_supplycost AS supply_cost,
+        ps_comment AS comment
 
-    from source
+    FROM source
 
 )
 
-select * from renamed
+SELECT * FROM renamed

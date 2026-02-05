@@ -4,28 +4,28 @@
 ) }}
 
 
-with source as (
+WITH source AS (
 
-    select *
-    from {{ source('tpch', 'part') }}
+    SELECT *
+    FROM {{ source('tpch', 'part') }}
 
 ),
 
-renamed as (
+renamed AS (
 
-    select
-        p_partkey as part_id,
-        p_name as part_name,
-        p_mfgr as manufacturer,
-        p_brand as brand,
-        p_type as part_type,
-        p_size as size,
-        p_container as container,
-        p_retailprice as retail_price,
-        p_comment as comment
+    SELECT
+        p_partkey AS part_id,
+        p_name AS part_name,
+        p_mfgr AS manufacturer,
+        p_brand AS brand,
+        p_type AS part_type,
+        p_size AS size,
+        p_container AS container,
+        p_retailprice AS retail_price,
+        p_comment AS comment
 
-    from source
+    FROM source
 
 )
 
-select * from renamed
+SELECT * FROM renamed

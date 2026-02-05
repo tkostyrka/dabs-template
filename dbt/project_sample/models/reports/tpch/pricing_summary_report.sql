@@ -1,22 +1,22 @@
 -- TPC-H/TPC-R Pricing Summary Report Query (Q1)
-select
+SELECT
     return_flag,
     line_status,
-    sum(quantity) as sum_qty,
-    sum(extended_price) as sum_base_price,
-    sum(extended_price * (1 - discount)) as sum_disc_price,
-    sum(extended_price * (1 - discount) * (1 + tax)) as sum_charge,
-    avg(quantity) as avg_qty,
-    avg(extended_price) as avg_price,
-    avg(discount) as avg_disc,
-    count(*) as count_order
-from
+    SUM(quantity) AS sum_qty,
+    SUM(extended_price) AS sum_base_price,
+    SUM(extended_price * (1 - discount)) AS sum_disc_price,
+    SUM(extended_price * (1 - discount) * (1 + tax)) AS sum_charge,
+    AVG(quantity) AS avg_qty,
+    AVG(extended_price) AS avg_price,
+    AVG(discount) AS avg_disc,
+    COUNT(*) AS count_order
+FROM
     {{ ref('stg_tpch__lineitem') }}
-where
-    ship_date <= dateadd(day, -90, date '1998-12-01')
-group by
+WHERE
+    ship_date <= DATEADD(DAY, -90, DATE '1998-12-01')
+GROUP BY
     return_flag,
     line_status
-order by
+ORDER BY
     return_flag,
     line_status

@@ -4,22 +4,22 @@
 ) }}
 
 
-with source as (
+WITH source AS (
 
-    select *
-    from {{ source('tpch', 'region') }}
+    SELECT *
+    FROM {{ source('tpch', 'region') }}
 
 ),
 
-renamed as (
+renamed AS (
 
-    select
-        r_regionkey as region_id,
-        r_name as region_name,
-        r_comment as comment
+    SELECT
+        r_regionkey AS region_id,
+        r_name AS region_name,
+        r_comment AS comment
 
-    from source
+    FROM source
 
 )
 
-select * from renamed
+SELECT * FROM renamed

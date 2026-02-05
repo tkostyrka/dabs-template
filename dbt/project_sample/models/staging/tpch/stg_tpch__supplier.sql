@@ -4,26 +4,26 @@
 ) }}
 
 
-with source as (
+WITH source AS (
 
-    select *
-    from {{ source('tpch', 'supplier') }}
+    SELECT *
+    FROM {{ source('tpch', 'supplier') }}
 
 ),
 
-renamed as (
+renamed AS (
 
-    select
-        s_suppkey as supplier_id,
-        s_name as supplier_name,
-        s_address as address,
-        s_nationkey as nation_id,
-        s_phone as phone_number,
-        s_acctbal as account_balance,
-        s_comment as comment
+    SELECT
+        s_suppkey AS supplier_id,
+        s_name AS supplier_name,
+        s_address AS address,
+        s_nationkey AS nation_id,
+        s_phone AS phone_number,
+        s_acctbal AS account_balance,
+        s_comment AS comment
 
-    from source
+    FROM source
 
 )
 
-select * from renamed
+SELECT * FROM renamed

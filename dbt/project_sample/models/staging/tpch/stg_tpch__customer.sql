@@ -4,27 +4,27 @@
 ) }}
 
 
-with source as (
+WITH source AS (
 
-    select *
-    from {{ source('tpch', 'customer') }}
+    SELECT *
+    FROM {{ source('tpch', 'customer') }}
 
 ),
 
-renamed as (
+renamed AS (
 
-    select
-        c_custkey as customer_id,
-        c_name as customer_name,
-        c_address as address,
-        c_nationkey as nation_id,
-        c_phone as phone_number,
-        c_acctbal as account_balance,
-        c_mktsegment as market_segment,
-        c_comment as comment
+    SELECT
+        c_custkey AS customer_id,
+        c_name AS customer_name,
+        c_address AS address,
+        c_nationkey AS nation_id,
+        c_phone AS phone_number,
+        c_acctbal AS account_balance,
+        c_mktsegment AS market_segment,
+        c_comment AS comment
 
-    from source
+    FROM source
 
 )
 
-select * from renamed
+SELECT * FROM renamed
