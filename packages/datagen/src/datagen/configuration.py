@@ -100,14 +100,6 @@ class Entity:
     columns: List[Column] = field(default_factory=list)
 
     def __post_init__(self) -> None:
-        """
-        Post-initialization checks for Entity.
-
-        Raises
-        ------
-        ValueError
-            If duplicate column names are found.
-        """
         # Check for duplicate column names
         names = [col.name for col in self.columns]
         if len(names) != len(set(names)):
