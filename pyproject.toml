@@ -4,7 +4,10 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = ["datagen"]
+dependencies = [
+    "datagen",
+    "dbt-databricks>=1.11.4",
+]
 
 # ---------------------------------------------
 # uv workspace configuration
@@ -38,6 +41,8 @@ dev = [
     "mkdocs-section-index>=0.3.10",
     "pre-commit>=4.5.1",
     "pydocstyle>=6.3.0",
+    "sqlfluff>=4.0.0",
+    "sqlfluff-templater-dbt>=4.0.0",
 ]
 
 # ---------------------------------------------

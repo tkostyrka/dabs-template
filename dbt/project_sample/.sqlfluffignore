@@ -1,0 +1,7 @@
+# dbt artefacts everywhere
+dbt_packages/
+logs/
+target/
+
+# venv / tooling
+.venv/

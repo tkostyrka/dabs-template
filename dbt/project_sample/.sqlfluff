@@ -1,0 +1,9 @@
+[sqlfluff]
+dialect = databricks
+
+[sqlfluff:templater:dbt]
+project_dir = .
+profiles_dir = ../../.dbt
+
+[sqlfluff:rules]
+exclude_rules = RF02

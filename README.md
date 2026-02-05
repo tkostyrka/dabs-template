@@ -22,3 +22,7 @@ uv add --dev ruff
 
 # just
 choco install just
+
+# sqlfluff
+uv run sqlfluff lint dbt/project_sample
+uv run sqlfluff fix dbt/project_sample
