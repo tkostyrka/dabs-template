@@ -40,7 +40,6 @@ dev = [
     "mkdocs-literate-nav>=0.6.2",
     "mkdocs-section-index>=0.3.10",
     "pre-commit>=4.5.1",
-    "pydocstyle>=6.3.0",
     "sqlfluff>=4.0.0",
     "sqlfluff-templater-dbt>=4.0.0",
 ]
@@ -52,9 +51,22 @@ dev = [
 testpaths = ["tests"]
 addopts = "-ra"
 
+# ---------------------------------------------
+# ruff
+# ---------------------------------------------
 [tool.ruff]
 line-length = 100
 
+[tool.ruff.lint]
+select = ["E", "F", "I", "D"]
+ignore = ["D104"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+# ---------------------------------------------
+# mypy
+# ---------------------------------------------
 [tool.mypy]
 files = ["packages/"]
 check_untyped_defs = true
@@ -63,8 +75,3 @@ explicit_package_bases = true
 mypy_path = [
     "packages/datagen/src"
 ]
-
-[tool.pydocstyle]
-convention = "numpy"
-add-ignore = ["D104"]  # ignore missing docstring in package __init__.py
-match-dir = "^packages/[^/]+/src"

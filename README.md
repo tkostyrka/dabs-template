@@ -18,8 +18,6 @@ uv run pre-commit run --all-files
 uv add --dev ruff
 
 # mypy
-# pydocstyle
-
 # just
 choco install just
 
