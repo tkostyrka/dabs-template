@@ -1,0 +1,25 @@
+name: DAB - deploy
+description: "---"
+
+inputs:
+  environment:
+    description: ''
+    default: tst
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Configure authentication
+      uses: databricks/setup-cli@main
+
+    - name: Databricks Deploy
+      shell: bash
+      run: |
+        databricks bundle deploy -t ${{ inputs.environment }}
+      env:
+        DATABRICKS_TOKEN: dose9f02fc4cbdc59b486d4e18d2f6f8e741
+        # DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
+        # DATABRICKS_BUNDLE_ENV: prod

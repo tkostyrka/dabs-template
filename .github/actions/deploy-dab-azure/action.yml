@@ -1,0 +1,31 @@
+name: DAB - deploy
+description: "---"
+
+inputs:
+  azure_tenant_id:
+    description: 'Azure Active Directory tenant ID used for authentication'
+    required: true
+  azure_client_id:
+    description: 'Azure service principal/client ID used for login'
+    required: true
+  environment:
+    description: ''
+    default: nonprd
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Configure authentication
+      uses: databricks/setup-cli@main
+
+    - name: Databricks Deploy
+      shell: bash
+      run: |
+        databricks bundle deploy -t ${{ inputs.environment }}
+      env:
+        ARM_TENANT_ID: ${{ inputs.azure_tenant_id }}
+        ARM_CLIENT_ID: ${{ inputs.azure_client_id }}
+        ARM_USE_MSI: "true"
