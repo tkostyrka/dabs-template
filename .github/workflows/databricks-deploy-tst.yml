@@ -1,0 +1,24 @@
+name: '[tst]: Databricks Bundle'
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# permissions:
+#   id-token: write
+#   contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: tst
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: deploy
+      uses: ./.github/actions/deploy-dab-aws
+      with:
+        environment: tst
