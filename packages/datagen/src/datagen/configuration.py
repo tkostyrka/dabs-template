@@ -108,10 +108,15 @@ class Entity:
         ValueError
             If duplicate column names are found.
         """
-        # Check for duplicate column names
-        names = [col.name for col in self.columns]
-        if len(names) != len(set(names)):
-            duplicates = set([x for x in names if names.count(x) > 1])
+        # Check for duplicate column names (O(n) pass)
+        seen: set[str] = set()
+        duplicates: set[str] = set()
+        for col in self.columns:
+            if col.name in seen:
+                duplicates.add(col.name)
+            else:
+                seen.add(col.name)
+        if duplicates:
             raise ValueError(f"Duplicate column names are not allowed: {duplicates}")
 
         # Store columns as a dictionary for quick access

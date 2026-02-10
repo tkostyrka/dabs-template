@@ -3,8 +3,18 @@ description: "---"
 
 inputs:
   environment:
-    description: ''
+    description: Databricks bundle target
     default: tst
+  bundle_path:
+    description: Path to the Databricks bundle directory
+    default: bundles/sample_bundle
+    required: false
+  databricks_client_id:
+    description: Service principal client id
+    required: true
+  databricks_client_secret:
+    description: Service principal client secret
+    required: true
 
 runs:
   using: 'composite'
@@ -17,10 +27,11 @@ runs:
 
     - name: Databricks Deploy
       shell: bash
-      working-directory: bundles/sample_bundle #parametrize
+      working-directory: ${{ inputs.bundle_path }}
       run: |
+        databricks auth describe
         databricks bundle deploy -t ${{ inputs.environment }}
       env:
-        DATABRICKS_TOKEN: dose9f02fc4cbdc59b486d4e18d2f6f8e741 #rmv after tests
-        # DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
-        # DATABRICKS_BUNDLE_ENV: prod
+        DATABRICKS_CLIENT_ID: ${{ inputs.databricks_client_id }}
+        DATABRICKS_CLIENT_SECRET: ${{ inputs.databricks_client_secret }}
+          # DATABRICKS_BUNDLE_ENV: prod

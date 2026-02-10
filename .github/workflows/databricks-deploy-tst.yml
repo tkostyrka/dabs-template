@@ -6,6 +6,10 @@ on:
       - main
   workflow_dispatch:
 
+concurrency:
+  group: "tst-bundles"
+  cancel-in-progress: false
+
 # permissions:
 #   id-token: write
 #   contents: read
@@ -14,6 +18,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: tst
+
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -22,3 +27,7 @@ jobs:
       uses: ./.github/actions/deploy-dab-aws
       with:
         environment: tst
+        bundle_path: bundles/sample_bundle
+
+        databricks_client_id: ${{ secrets.DATABRICKS_CLIENT_ID }}
+        databricks_client_secret: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
