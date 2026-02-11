@@ -10,12 +10,10 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
-# permissions:
-#   contents: read
-
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: tst
 
     steps:
       - name: Checkout repository
@@ -32,11 +30,44 @@ jobs:
 
       - name: Build MkDocs site
         run: uv run mkdocs build
+        # run: uv run mkdocs build --site-dir build/docs
+
+      - name: Build dbt docs
+        run: |
+          uv run dbt docs generate \
+            --project-dir dbt/sample_project \
+            --profiles-dir .dbt/workflows \
+            --profile cicd
+        env:
+          DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+          DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
+
+          DBT_CATALOG: second
+          DBT_SCHEMA: workflow_tst
+          DATABRICKS_HOST: https://dbc-22d1cc79-2974.cloud.databricks.com/
+          DATABRICKS_HTTP_PATH: /sql/1.0/warehouses/6915297f40611326
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
           path: site
+
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+
+  #   environment:
+  #     name: tst
+  #     url: ${{ steps.deployment.outputs.page_url }}
+
+  #   permissions:
+  #     pages: write      # to deploy to Pages
+  #     id-token: write   # to verify the deployment originates from an appropriate source
+
+  #   steps:
+  #     - name: Deploy to GitHub Pages
+  #       id: deployment
+  #       uses: actions/deploy-pages@v4
 
   deploy:
     runs-on: ubuntu-latest
