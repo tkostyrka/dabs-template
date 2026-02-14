@@ -6,7 +6,7 @@ import mkdocs_gen_files
 
 nav = mkdocs_gen_files.Nav()
 
-src = Path(__file__).parent.parent / "packages/datagen/src"
+src = Path(__file__).parent.parent.parent / "packages/datagen/src"
 
 for path in sorted(src.rglob("*.py")):
     module_path = path.relative_to(src).with_suffix("")
