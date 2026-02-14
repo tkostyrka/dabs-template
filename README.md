@@ -22,8 +22,8 @@ uv add --dev ruff
 choco install just
 
 # sqlfluff
-uv run sqlfluff lint dbt/project_sample
-uv run sqlfluff fix dbt/project_sample
+uv run sqlfluff lint dbt/sample_project
+uv run sqlfluff fix dbt/sample_project
 
 # versioning
 https://semver.org/
@@ -56,3 +56,25 @@ https://docs.databricks.com/aws/en/dev-tools/auth/provider-github
 https://github.com/databricks/setup-cli
 
 https://www.youtube.com/watch?v=XumUXF1e6RI
+
+
+# dbt
+
+from root:
+---
+uv run dbt run `
+  --project-dir dbt/sample_project `
+  --profiles-dir .dbt
+
+uv run dbt docs generate `
+  --project-dir dbt/sample_project `
+  --profiles-dir .dbt
+
+uv run dbt docs serve `
+  --project-dir dbt/sample_project `
+  --profiles-dir .dbt
+
+from project:
+---
+uv run dbt run `
+  --profiles-dir ../../.dbt

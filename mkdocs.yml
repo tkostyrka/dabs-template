@@ -7,7 +7,7 @@ plugins:
 - search
 - gen-files:
     scripts:
-    - scripts/gen_ref_pages.py
+    - docs/scripts/gen_ref_pages.py
 - literate-nav:
     nav_file: SUMMARY.md
 - section-index
@@ -15,3 +15,4 @@ plugins:
 nav:
 - home: index.md
 - packages: reference/
+- dbt: dbt/

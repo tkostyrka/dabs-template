@@ -1,12 +1,12 @@
 # update following:
 #
-# project_sample
+# sample_project
 # catalog
 # schema
 # http_path
 # host
 
-# project_sample:
+# sample_project:
    target: dev
    outputs:
     dev:
