@@ -47,10 +47,15 @@ jobs:
           DATABRICKS_HOST: https://dbc-22d1cc79-2974.cloud.databricks.com/
           DATABRICKS_HTTP_PATH: /sql/1.0/warehouses/6915297f40611326
 
+      # - name: Upload Pages artifact
+      #   uses: actions/upload-pages-artifact@v4
+      #   with:
+      #     path: site
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: site
+          path: dbt/sample_project/target
 
   # deploy:
   #   runs-on: ubuntu-latest
