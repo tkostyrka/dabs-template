@@ -1,4 +1,4 @@
-name: tester pipeline
+name: '[tst]: Documentation'
 
 on:
   push:
