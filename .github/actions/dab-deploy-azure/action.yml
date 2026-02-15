@@ -1,4 +1,4 @@
-name: DAB - deploy
+name: bundle deploy (azure)
 description: "---"
 
 inputs:

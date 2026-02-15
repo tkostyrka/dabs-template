@@ -1,14 +1,14 @@
-name: DAB - deploy
+name: bundle command (aws)
 description: "---"
 
 inputs:
-  environment:
-    description: Databricks bundle target
-    default: tst
   bundle_path:
     description: Path to the Databricks bundle directory
     default: bundles/sample_bundle
     required: false
+  bundle_environment:
+    description: Databricks bundle target
+    default: tst
   bundle_command:
     description: Command to be executed
     default: validate
@@ -29,12 +29,12 @@ runs:
     - name: Configure authentication
       uses: databricks/setup-cli@main
 
-    - name: Databricks Deploy
+    - name: bundle command
       shell: bash
       working-directory: ${{ inputs.bundle_path }}
       run: |
         databricks auth describe
-        databricks bundle ${{ inputs.bundle_command }} -t ${{ inputs.environment }}
+        databricks bundle ${{ inputs.bundle_command }} -t ${{ inputs.bundle_environment }}
       env:
         DATABRICKS_CLIENT_ID: ${{ inputs.databricks_client_id }}
         DATABRICKS_CLIENT_SECRET: ${{ inputs.databricks_client_secret }}

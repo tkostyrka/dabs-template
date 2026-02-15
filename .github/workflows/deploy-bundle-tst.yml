@@ -6,6 +6,12 @@ on:
       - main
   workflow_dispatch:
 
+# Global workflow-level variables
+env:
+  ENVIRONMENT_NAME: tst
+  BUNDLE_DIR: bundles/sample_bundle
+  DOCS_OUTPUT_DIR: build/docs
+
 concurrency:
   group: "tst-bundles"
   cancel-in-progress: false
@@ -17,17 +23,20 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: tst
+    environment: ${{ env.ENVIRONMENT_NAME }}
 
     steps:
+      # Checkout repository source code
     - name: Checkout
       uses: actions/checkout@v4
 
+      # Deploy Databricks Asset Bundle
+      # Uses custom composite action wrapping `databricks bundle deploy`
     - name: bundle deploy
       uses: ./.github/actions/dab-command-aws
       with:
-        environment: tst
-        bundle_path: bundles/sample_bundle
+        bundle_path: ${{ env.BUNDLE_DIR }}
+        bundle_environment: t${{ env.ENVIRONMENT_NAME }}t
         bundle_command: deploy
 
         databricks_client_id: ${{ secrets.DATABRICKS_CLIENT_ID }}

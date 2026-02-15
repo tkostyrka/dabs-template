@@ -6,29 +6,62 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+# Global workflow-level variables
+env:
+  ENVIRONMENT_NAME: tst
+  BUNDLE_DIR: bundles/sample_bundle
+  DBT_PROJECT_DIR: dbt/sample_project
+  DOCS_OUTPUT_DIR: build/docs
+
 jobs:
   validate:
     runs-on: ubuntu-latest
-    environment: tst
+    environment: ${{ env.ENVIRONMENT_NAME }}
 
     steps:
+      # Checkout repository source code
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Setup Python + uv dependency manager
+      # (custom composite action maintained in this repo)
       - uses: ./.github/actions/uv-setup
 
+      # Run pre-commit hooks against the entire repository
+      # Ensures formatting, linting, and basic static validation
       - name: pre-commit
         run: uv run pre-commit run --all-files
 
+      # Execute unit tests
+      # Fails pipeline if any test fails
       - name: pytest
         run: uv run pytest
 
+      # Validate Databricks Asset Bundle (no deployment)
+      # Ensures bundle configuration is syntactically and structurally correct
       - name: bundle validate
         uses: ./.github/actions/dab-command-aws
         with:
-          environment: tst
-          bundle_path: bundles/sample_bundle
+          bundle_path: ${{ env.BUNDLE_DIR }}
+          bundle_environment: ${{ env.ENVIRONMENT_NAME }}
           bundle_command: validate
 
           databricks_client_id: ${{ secrets.DATABRICKS_CLIENT_ID }}
           databricks_client_secret: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
+
+      # Compile dbt project against Databricks
+      # Validates model graph, refs, sources, and SQL syntax
+      # Does NOT execute models (safe for CI validation)
+      - name: dbt compile
+        uses: ./.github/actions/dbt-command
+        with:
+          dbt_command: compile
+          dbt_project_dir: ${{ env.DBT_PROJECT_DIR }}
+
+          client_id: ${{ secrets.DATABRICKS_CLIENT_ID }}
+          client_secret: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
+
+          host: ${{ vars.DATABRICKS_HOST }}
+          http_path: ${{ vars.DATABRICKS_HTTP_PATH }}
+          catalog: ${{ vars.DBT_CATALOG }}
+          schema: ${{ vars.DBT_SCHEMA }}
