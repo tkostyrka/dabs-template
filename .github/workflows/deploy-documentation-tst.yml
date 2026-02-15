@@ -50,33 +50,40 @@ jobs:
           catalog: ${{ vars.DBT_CATALOG }}
           schema: ${{ vars.DBT_SCHEMA }}
 
-      # Move generated dbt docs into MkDocs output directory
-      # so they are included in the final Pages artifact
-      - name: dbt docs move
+      # tests
+      - name: xxx
         run: |
-          mv ${{ env.DBT_PROJECT_DIR }}/target \
-             ${{ env.DOCS_OUTPUT_DIR }}/dbt
+          ls -la
+          ls -la ${{ env.DBT_PROJECT_DIR }}
+          ls -la ${{ env.DOCS_OUTPUT_DIR }}
 
-      # Upload static site as GitHub Pages artifact
-      # This prepares content for Pages deployment job
-      - name: upload pages (artifact)
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: ${{ env.DOCS_OUTPUT_DIR }}/
+  #     # Move generated dbt docs into MkDocs output directory
+  #     # so they are included in the final Pages artifact
+  #     - name: dbt docs move
+  #       run: |
+  #         mv ${{ env.DBT_PROJECT_DIR }}/target \
+  #            ${{ env.DOCS_OUTPUT_DIR }}/dbt
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
+  #     # Upload static site as GitHub Pages artifact
+  #     # This prepares content for Pages deployment job
+  #     - name: upload pages (artifact)
+  #       uses: actions/upload-pages-artifact@v4
+  #       with:
+  #         path: ${{ env.DOCS_OUTPUT_DIR }}/
 
-    environment:
-      name: tst
-      url: ${{ steps.deployment.outputs.page_url }}
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: build
 
-    permissions:
-      pages: write      # to deploy to Pages
-      id-token: write   # to verify the deployment originates from an appropriate source
+  #   environment:
+  #     name: tst
+  #     url: ${{ steps.deployment.outputs.page_url }}
 
-    steps:
-      - name: deploy pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+  #   permissions:
+  #     pages: write      # to deploy to Pages
+  #     id-token: write   # to verify the deployment originates from an appropriate source
+
+  #   steps:
+  #     - name: deploy pages
+  #       id: deployment
+  #       uses: actions/deploy-pages@v4
