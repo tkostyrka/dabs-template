@@ -50,19 +50,19 @@ jobs:
           catalog: ${{ vars.DBT_CATALOG }}
           schema: ${{ vars.DBT_SCHEMA }}
 
-      # tests
-      - name: xxx
-        run: |
-          ls -la
-          ls -la ${{ env.DBT_PROJECT_DIR }}/target
-          ls -la ${{ env.DOCS_OUTPUT_DIR }}
+      # # tests
+      # - name: xxx
+      #   run: |
+      #     ls -la
+      #     ls -la ${{ env.DBT_PROJECT_DIR }}/target
+      #     ls -la ${{ env.DOCS_OUTPUT_DIR }}/dbt
 
-  #     # Move generated dbt docs into MkDocs output directory
-  #     # so they are included in the final Pages artifact
-  #     - name: dbt docs move
-  #       run: |
-  #         mv ${{ env.DBT_PROJECT_DIR }}/target \
-  #            ${{ env.DOCS_OUTPUT_DIR }}/dbt
+      # Move generated dbt docs into MkDocs output directory
+      # so they are included in the final Pages artifact
+      - name: dbt docs move
+        run: |
+          mv ${{ env.DBT_PROJECT_DIR }}/target \
+             ${{ env.DOCS_OUTPUT_DIR }}/dbt
 
   #     # Upload static site as GitHub Pages artifact
   #     # This prepares content for Pages deployment job
