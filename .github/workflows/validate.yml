@@ -1,0 +1,31 @@
+name: 'validation'
+
+on:
+  # pull_request:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    environment: tst
+
+    steps:
+      - uses: ./.github/actions/uv-setup
+
+      - name: pre-commit
+        run: uv run pre-commit run --all-files
+
+      - name: pytest
+        run: uv run pytest
+
+      - name: bundle validate
+        uses: ./.github/actions/dab-command-aws
+        with:
+          environment: tst
+          bundle_path: bundles/sample_bundle
+          bundle_command: validate
+
+          databricks_client_id: ${{ secrets.DATABRICKS_CLIENT_ID }}
+          databricks_client_secret: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
