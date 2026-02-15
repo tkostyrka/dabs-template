@@ -54,7 +54,7 @@ jobs:
       - name: xxx
         run: |
           ls -la
-          ls -la ${{ env.DBT_PROJECT_DIR }}
+          ls -la ${{ env.DBT_PROJECT_DIR }}/target
           ls -la ${{ env.DOCS_OUTPUT_DIR }}
 
   #     # Move generated dbt docs into MkDocs output directory
