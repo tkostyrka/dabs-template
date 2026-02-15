@@ -1,4 +1,4 @@
-name: '[tst]: Documentation'
+name: '[tst]: documentation deploy'
 
 on:
   push:
@@ -16,22 +16,12 @@ jobs:
     environment: tst
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: ./.github/actions/uv-setup
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v7
-
-      - name: Set up Python
-        run: uv python install
-
-      - name: Install dependencies
-        run: uv sync
-
-      - name: Build MkDocs site
+      - name: mkdocs build
         run: uv run mkdocs build --site-dir build/docs/
 
-      - name: Build dbt docs
+      - name: dbt docs generate
         run: |
           uv run dbt docs generate \
             --project-dir dbt/sample_project \
@@ -48,7 +38,7 @@ jobs:
           DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
           DATABRICKS_HTTP_PATH: ${{ vars.DATABRICKS_HTTP_PATH }}
 
-      - name: Upload Pages artifact
+      - name: upload pages (artifact)
         uses: actions/upload-pages-artifact@v4
         with:
           path: build/docs/
@@ -66,6 +56,6 @@ jobs:
       id-token: write   # to verify the deployment originates from an appropriate source
 
     steps:
-      - name: Deploy to GitHub Pages
+      - name: deploy pages
         id: deployment
         uses: actions/deploy-pages@v4

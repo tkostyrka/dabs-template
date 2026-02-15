@@ -1,4 +1,4 @@
-name: '[tst]: Databricks Bundle'
+name: '[tst]: databricks bundle deploy'
 
 on:
   push:
@@ -23,11 +23,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: deploy
-      uses: ./.github/actions/deploy-dab-aws
+    - name: bundle deploy
+      uses: ./.github/actions/dab-command-aws
       with:
         environment: tst
         bundle_path: bundles/sample_bundle
+        bundle_command: deploy
 
         databricks_client_id: ${{ secrets.DATABRICKS_CLIENT_ID }}
         databricks_client_secret: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
