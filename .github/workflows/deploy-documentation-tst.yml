@@ -8,7 +8,6 @@ on:
 
 # Global workflow-level variables
 env:
-  ENVIRONMENT_NAME: tst
   DBT_PROJECT_DIR: dbt/sample_project
   DOCS_OUTPUT_DIR: build/docs
 
@@ -19,7 +18,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: ${{ env.ENVIRONMENT_NAME }}
+    environment: tst
 
     steps:
       # Checkout repository source code
@@ -70,7 +69,7 @@ jobs:
     needs: build
 
     environment:
-      name: ${{ env.ENVIRONMENT_NAME }}
+      name: tst
       url: ${{ steps.deployment.outputs.page_url }}
 
     permissions:
