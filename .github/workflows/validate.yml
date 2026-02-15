@@ -8,7 +8,6 @@ on:
 
 # Global workflow-level variables
 env:
-  ENVIRONMENT_NAME: tst
   BUNDLE_DIR: bundles/sample_bundle
   DBT_PROJECT_DIR: dbt/sample_project
   DOCS_OUTPUT_DIR: build/docs
@@ -16,7 +15,7 @@ env:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    environment: ${{ env.ENVIRONMENT_NAME }}
+    environment: tst
 
     steps:
       # Checkout repository source code
@@ -43,7 +42,7 @@ jobs:
         uses: ./.github/actions/dab-command-aws
         with:
           bundle_path: ${{ env.BUNDLE_DIR }}
-          bundle_environment: ${{ env.ENVIRONMENT_NAME }}
+          bundle_environment: tst
           bundle_command: validate
 
           databricks_client_id: ${{ secrets.DATABRICKS_CLIENT_ID }}
