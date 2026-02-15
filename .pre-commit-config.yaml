@@ -8,6 +8,18 @@ repos:
         types: [python]
         pass_filenames: false
 
+      - id: sqlfluff-lint
+        name: sqlfluff lint via uv
+        entry: uv run sqlfluff lint dbt/sample_project
+        language: system
+        pass_filenames: false
+
+      - id: sqlfluff-fix
+        name: sqlfluff fix via uv
+        entry: uv run sqlfluff fix dbt/sample_project
+        language: system
+        pass_filenames: false
+
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.14.14
     hooks:
