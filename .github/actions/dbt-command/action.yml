@@ -1,0 +1,52 @@
+name: dbt command (aws)
+description: "---"
+
+inputs:
+  dbt_project_dir:
+    description: "Path to the dbt project directory"
+    required: false
+    default: "dbt/sample_project"
+  dbt_command:
+    description: Command to be executed
+    default: compile
+    required: false
+
+  client_id:
+    description: "Service principal client id"
+    required: true
+  client_secret:
+    description: "Service principal client secret"
+    required: true
+
+  host:
+    description: "Databricks workspace host"
+    required: true
+  http_path:
+    description: "Databricks SQL warehouse HTTP path"
+    required: true
+  catalog:
+    description: "dbt target catalog"
+    required: true
+  schema:
+    description: "dbt target schema"
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+
+    - name: dbt command
+      shell: bash
+      run: |
+        uv run dbt ${{ inputs.dbt_command }} \
+          --project-dir ${{ inputs.dbt_project_dir }} \
+          --profiles-dir .dbt/workflows \
+          --target cicd
+      env:
+        DATABRICKS_CLIENT_ID: ${{ inputs.client_id }}
+        DATABRICKS_CLIENT_SECRET: ${{ inputs.client_secret }}
+
+        DATABRICKS_HOST: ${{ inputs.host }}
+        DATABRICKS_HTTP_PATH: ${{ inputs.http_path }}
+        DBT_CATALOG: ${{ inputs.catalog }}
+        DBT_SCHEMA: ${{ inputs.schema }}

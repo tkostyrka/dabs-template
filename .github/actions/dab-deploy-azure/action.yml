@@ -1,4 +1,4 @@
-name: DAB - deploy
+name: bundle deploy (azure)
 description: "---"
 
 inputs:
@@ -15,9 +15,6 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-
     - name: Configure authentication
       uses: databricks/setup-cli@main
 
