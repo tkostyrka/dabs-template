@@ -45,6 +45,29 @@ This template intentionally does **not** include:
 - Greenfield Databricks data projects (new data workloads built on an existing platform)
 - Migration from ad-hoc notebooks to structured repositories
 - Building dbt-based projects (analytics engineering workflows on Databricks)
+- Wrapping up existing Databricks Asset Bundles (DAB)-based projects and enhancing them with testing, CI/CD, code quality checks, and structured repository standards
+- Standardizing projects across the organization through adoption of an approved, reusable template
+
+# Included Tooling
+This template comes preconfigured with a set of tools to ensure code quality, reproducibility, and best practices for Databricks projects.
+
+## Core Tools
+- **Databricks Asset Bundles (DABs)** – for version-controlled deployment of notebooks, jobs, and declarative pipelines
+- **dbt** – for analytics engineering and transformation workflows
+- **uv** – Python package, project, and environment manager
+
+## Code Quality & Linting
+- **pre-commit** – to enforce hooks and coding standards before commits
+- **ruff** – fast Python linter
+- **mypy** – static type checking for Python
+- **sqlfluff** – SQL linting and formatting for consistent style across queries
+
+## Documentation & Automation
+- **mkdocs** – for generating project documentation websites from Markdown
+- **justfile** – command runner / task automation for common development tasks
+
+## Testing
+- **pytest** – Python testing framework for unit and integration tests
 
 # WIP
 -------------------------------------------------------------------------
