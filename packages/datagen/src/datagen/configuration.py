@@ -6,21 +6,17 @@ from typing import Any, Dict, List, Optional, Tuple
 
 @dataclass
 class Column:
-    """
-    Placeholder docstring for Column class.
+    """Placeholder docstring for Column class.
 
-    Parameters
-    ----------
-    name : str
-        Column name.
-    dtype : type
-        Data type of the column.
-    value_range : Optional[Tuple[float, float]], optional
-        Minimum and maximum allowed values (numeric types only), by default None.
-    allowed_values : List[Any], optional
-        Explicitly allowed values, by default empty list.
-    nullable : bool, optional
-        Whether None is allowed, by default True.
+    Args:
+        name (str): Column name.
+        dtype (type): Data type of the column.
+        value_range (Optional[Tuple[float, float]], optional): Minimum and maximum
+            allowed values (numeric types only). Defaults to None.
+        allowed_values (List[Any], optional): Explicitly allowed values. Defaults
+            to an empty list.
+        nullable (bool, optional): Whether None is allowed. Defaults to True.
+
     """
 
     name: str
@@ -30,13 +26,11 @@ class Column:
     nullable: bool = True
 
     def __post_init__(self) -> None:
-        """
-        Post-initialization checks for Column.
+        """Post-initialization checks for Column.
 
-        Raises
-        ------
-        ValueError
-            If value_range is set for non-numeric dtype or min > max.
+        Raises:
+            ValueError: If `value_range` is set for non-numeric `dtype` or if min > max.
+
         """
         numeric_types = (int, float)
 
@@ -53,18 +47,14 @@ class Column:
                 raise ValueError(f"value_range min cannot be greater than max: {self.value_range}")
 
     def validate(self, value: Any) -> bool:
-        """
-        Validate a value against this column's rules.
+        """Validate a value against this column's rules.
 
-        Parameters
-        ----------
-        value : Any
-            The value to validate.
+        Args:
+          value (Any): The value to validate.
 
-        Returns
-        -------
-        bool
-            True if value is valid, False otherwise.
+        Returns:
+          bool: True if value is valid, False otherwise.
+
         """
         if value is None:
             return self.nullable
@@ -85,28 +75,23 @@ class Column:
 
 @dataclass
 class Entity:
-    """
-    Placeholder docstring for Entity class.
+    """Placeholder docstring for Entity class.
 
-    Parameters
-    ----------
-    name : str
-        Name of the entity.
-    columns : List[Column], optional
-        List of columns in the entity, by default empty list.
+    Args:
+      name (str): Name of the entity.
+      columns (List[Column], optional): List of columns in the entity, by default empty list.
+
     """
 
     name: str
     columns: List[Column] = field(default_factory=list)
 
     def __post_init__(self) -> None:
-        """
-        Post-initialization checks for Entity.
+        """Post-initialization checks for Entity.
 
-        Raises
-        ------
-        ValueError
-            If duplicate column names are found.
+        Raises:
+          ValueError: If duplicate column names are found.
+
         """
         # Check for duplicate column names (O(n) pass)
         seen: set[str] = set()
@@ -123,18 +108,14 @@ class Entity:
         self._columns_dict: Dict[str, Column] = {col.name: col for col in self.columns}
 
     def add_column(self, column: Column) -> None:
-        """
-        Add a new column to the entity.
+        """Add a new column to the entity.
 
-        Parameters
-        ----------
-        column : Column
-            Column to add.
+        Args:
+          column (Column): Column to add.
 
-        Raises
-        ------
-        ValueError
-            If a column with the same name already exists.
+        Raises:
+          ValueError: If a column with the same name already exists.
+
         """
         if column.name in self._columns_dict:
             raise ValueError(
@@ -144,34 +125,26 @@ class Entity:
         self._columns_dict[column.name] = column
 
     def get_column(self, name: str) -> Column | None:
-        """
-        Retrieve a column by name.
+        """Retrieve a column by name.
 
-        Parameters
-        ----------
-        name : str
-            Name of the column.
+        Args:
+          name (str): Name of the column.
 
-        Returns
-        -------
-        Column or None
-            The column object if found, otherwise None.
+        Returns:
+          Column or None: The column object if found, otherwise None.
+
         """
         return self._columns_dict.get(name)
 
     def validate_row(self, row: dict) -> bool:
-        """
-        Validate a dictionary representing a row against all column constraints.
+        """Validate a dictionary representing a row against all column constraints.
 
-        Parameters
-        ----------
-        row : dict
-            Dictionary mapping column names to values.
+        Args:
+          row (dict): Dictionary mapping column names to values.
 
-        Returns
-        -------
-        bool
-            True if all columns in the row are valid, False otherwise.
+        Returns:
+          bool: True if all columns in the row are valid, False otherwise.
+
         """
         for col in self.columns:
             if col.name not in row:
