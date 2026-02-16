@@ -11,7 +11,14 @@ plugins:
 - literate-nav:
     nav_file: SUMMARY.md
 - section-index
-- mkdocstrings
+- mkdocstrings:
+    handlers:
+      python:
+        options:
+          # Ignore special methods
+          filters:
+            - "!^__init__$"
+            - "!^__post_init__$"
 nav:
 - home: index.md
 - packages: reference/

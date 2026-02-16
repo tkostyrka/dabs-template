@@ -62,7 +62,7 @@ select = ["E", "F", "I", "D"]
 ignore = ["D104"]
 
 [tool.ruff.lint.pydocstyle]
-convention = "numpy"
+convention = "google"
 
 # ---------------------------------------------
 # mypy
