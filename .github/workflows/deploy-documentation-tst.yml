@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - '.dbt/**'
+      - '.github/**'
+      - 'docs/**'
+      - 'README.md'
   workflow_dispatch:
 
 # Global workflow-level variables
