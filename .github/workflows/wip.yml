@@ -1,4 +1,4 @@
-name: 'validation (pr title) - Conventional Commits'
+name: Validate PR title
 
 permissions:
   pull-requests: read
@@ -10,8 +10,9 @@ on:
       - opened
       - edited
       - synchronize
-    # paths-ignore:
-    #   - .dbt/**
+    paths-ignore:
+      - configuration/**
+  workflow_dispatch:
 
 jobs:
   main:
@@ -22,13 +23,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-
-          # feat(ui): Add `Button` component
-          #  ^    ^    ^
-          #  |    |    |__ Subject
-          #  |    |_______ Scope
-          #  |____________ Type
-
           types: |
             feat
             fix
@@ -46,10 +40,4 @@ jobs:
             The subject "{subject}" found in the pull request title "{title}"
             didn't match the configured pattern. Any letters or numbers and spaces
             followed by an optional Jira ticket number in square brackets is allowed.
-
-          # For work-in-progress PRs you can typically use draft pull requests from GitHub.
-          # However, private repositories on the free plan don't have this option and therefore this action allows you to opt-in to using the special "[WIP]" prefix to indicate this state.
-
-          # example:
-          # [WIP] feat: Add support for Node.js 18
           wip: true
