@@ -22,15 +22,15 @@ This repository is intended to accelerate project setup and enforce consistency 
   - [Documentation & Automation](#documentation--automation)
   - [Testing](#testing)
 
-- [Getting Started](#getting-started)
-
-- [Configuration](#configuration)
-
 - [Development & Deployment Lifecycle](#development--deployment-lifecycle)
   - [Development Workflow](#development-workflow)
   - [Versioning & Release Management](#versioning--release-management)
   - [CI/CD & Environment Promotion](#cicd--environment-promotion)
   - [Release Governance Principles](#release-governance-principles)
+
+- [Getting Started](#getting-started)
+
+- [Configuration](#configuration)
 
 # Overview
 ## Purpose
@@ -146,9 +146,6 @@ A command runner for automating repetitive tasks. It defines project-specific ta
 ### pytest
 A Python testing framework that supports unit, functional, and integration tests. Pytest provides a simple syntax for writing tests, powerful fixtures for setup/teardown, and extensive plugins for coverage, reporting, and mocking.
 
-# Getting Started
-# Configuration
-
 # Development & Deployment Lifecycle
 ## Development Workflow
 ### Branching Strategy
@@ -159,6 +156,23 @@ Required checks, CI validation steps, Approval requirements, Merge policy
 
 ## Versioning & Release Management
 ### Commit & Versioning Strategy
+- https://semver.org/
+- https://www.conventionalcommits.org/en/v1.0.0/
+- https://github.com/googleapis/release-please
+
+| Type         | When to use                                |
+| ------------ | ------------------------------------------ |
+| **feat**     | New user-facing functionality              |
+| **fix**      | Bug fixes                                  |
+| **perf**     | Performance improvements                   |
+| **refactor** | Code restructuring without behavior change |
+| **build**    | Build system, dependencies, packaging      |
+| **ci**       | CI/CD configuration                        |
+| **docs**     | Documentation only                         |
+| **test**     | Adding or updating tests                   |
+| **style**    | Formatting only (no logic changes)         |
+| **chore**    | Repo maintenance / cleanup                 |
+
 ### Automated Releases
 How release-please works, Release PR generation, Changelog generation, Git tagging
 
@@ -193,6 +207,9 @@ How to redeploy previous tag, Handling hotfixes, Emergency procedures
 - Everything version-controlled
 - Immutable artifacts
 
+# Getting Started
+# Configuration
+
 # WIP
 -------------------------------------------------------------------------
 
@@ -220,27 +237,6 @@ choco install just
 # sqlfluff
 uv run sqlfluff lint dbt/sample_project
 uv run sqlfluff fix dbt/sample_project
-
-# versioning
-https://semver.org/
-https://www.conventionalcommits.org/en/v1.0.0/
-https://github.com/googleapis/release-please
-
-| Type         | When to use                                |
-| ------------ | ------------------------------------------ |
-| **feat**     | New user-facing functionality              |
-| **fix**      | Bug fixes                                  |
-| **perf**     | Performance improvements                   |
-| **refactor** | Code restructuring without behavior change |
-| **build**    | Build system, dependencies, packaging      |
-| **ci**       | CI/CD configuration                        |
-| **docs**     | Documentation only                         |
-| **test**     | Adding or updating tests                   |
-| **style**    | Formatting only (no logic changes)         |
-| **chore**    | Repo maintenance / cleanup                 |
-
-note:
-add validation build to PR that check if commit message is correct (is it possible?)
 
 # ci/cd
 
