@@ -3,7 +3,13 @@ name: 'validation (code)'
 on:
   # pull_request:
   push:
-    branches: [ main ]
+    branches:
+      - main
+    paths-ignore:
+      - '.dbt/**'
+      - '.github/**'
+      - 'docs/**'
+      - 'README.md'
   workflow_dispatch:
 
 # Global workflow-level variables
