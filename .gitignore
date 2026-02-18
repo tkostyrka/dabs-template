@@ -205,11 +205,3 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
-
-# custom/dbt
-target/
-dbt_packages/
-logs/
-
-package-lock.yml
-.dbt/profiles.yml

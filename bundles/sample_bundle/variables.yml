@@ -1,3 +1,7 @@
 variables:
-  default_catalog:
+  var_catalog:
     description: The name of the default catalog
+  var_schema:
+    description: The name of the default schema
+  var_warehouse_id:
+    description: Warehouse Id (number only, skip the '/sql/1.0/warehouses/' prefix)

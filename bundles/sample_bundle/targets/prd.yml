@@ -13,4 +13,6 @@ targets:
       - service_principal_name: 1b1707fc-842f-4c35-b341-7e20a537e8c7
         level: CAN_RUN
     variables:
-      default_catalog: sample_prd
+      var_catalog: xxx
+      var_schema: xxx
+      var_warehouse_id: xxx
