@@ -1,0 +1,18 @@
+resources:
+  jobs:
+    sample_job_dbt:
+      name: sample_job_dbt
+
+      trigger:
+
+      parameters:
+        - name: catalog
+          default: ${var.var_catalog}
+        - name: schema
+          default: ${var.var_schema}
+
+      tasks:
+
+        - task_key: notebook_task
+          notebook_task:
+            notebook_path: ../src/sample_notebook.ipynb
