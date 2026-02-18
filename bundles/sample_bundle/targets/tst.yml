@@ -14,4 +14,6 @@ targets:
       - service_principal_name: 6e7f8b90-1a74-4ec4-8a13-80681f5cfcf6
         level: CAN_RUN
     variables:
-      default_catalog: sample_tst
+      var_catalog: xxx
+      var_schema: xxx
+      var_warehouse_id: xxx

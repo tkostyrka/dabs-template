@@ -238,6 +238,9 @@ choco install just
 
 # Configuration
 
+# How-To's
+- add a new package > configure it in uv, reference it in bundle
+
 # Links
 https://medium.com/the-data-movement/day-16-dbt-pre-commit-hooks-linting-enforcing-sql-quality-with-sqlfluff-dbt-pre-commit-7a5d0639312e
 
