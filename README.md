@@ -99,11 +99,6 @@ Within each project, you will find, among other components:
 
 This structure ensures clear separation between projects, promotes maintainability, and supports consistent deployment across multiple environments.
 
-## dbt
-A framework for analytics engineering and transformation workflows. dbt allows you to define transformations as modular SQL models, test data quality, and manage dependencies between models. It integrates with Databricks to orchestrate transformations and maintain a clean, versioned data pipeline.
-
-[Official Documentation](https://github.com/dbt-labs/dbt-core)
-
 ## uv
 > Package-Based Development over Notebook-Only Development
 A modern Python package, project, and environment manager written in Rust. UV combines dependency management, virtual environment creation, and tool execution in a single fast CLI. It uses a universal lockfile to ensure reproducible installs across machines and environments.
@@ -120,11 +115,43 @@ It also significantly improves:
 - **Portability and reusability** – packages can be reused across multiple projects without copying notebook code.
 - **Maintainability** – structured codebases are easier to extend, refactor, and debug over time.
 
+## dbt
+A framework for analytics engineering and transformation workflows. dbt allows you to define transformations as modular SQL models, test data quality, and manage dependencies between models. It integrates with Databricks to orchestrate transformations and maintain a clean, versioned data pipeline.
+
+[Official Documentation](https://github.com/dbt-labs/dbt-core)
+
+from root:
+```
+uv run dbt run `
+  --project-dir dbt/sample_project `
+  --profiles-dir .dbt
+```
+```
+uv run dbt docs generate `
+  --project-dir dbt/sample_project `
+  --profiles-dir .dbt
+```
+```
+uv run dbt docs serve `
+  --project-dir dbt/sample_project `
+  --profiles-dir .dbt
+```
+
+from project:
+```
+uv run dbt run `
+  --profiles-dir ../../.dbt
+```
+
 # Tooling
 This template comes preconfigured with a set of tools to ensure code quality, reproducibility, and best practices for Databricks projects.
 ## Code Quality & Linting
 ### pre-commit
 A framework to manage and maintain multi-language pre-commit hooks. It automatically runs linters, formatters, or custom scripts before code is committed to Git, preventing style or syntax issues from entering the repository.
+
+```
+uv run pre-commit run --all-files
+```
 
 ### ruff
 An extremely fast Python linter and code checker. Ruff scans Python files for style violations, code smells, and errors with minimal overhead, providing a significant speed advantage over traditional linters like `flake8`.
@@ -134,6 +161,13 @@ A static type checker for Python. Mypy analyzes your code for type consistency a
 
 ### sqlfluff
 A SQL linter and formatter designed for consistent style and readability. It supports multiple SQL dialects, can automatically fix some style violations, and integrates into CI pipelines to enforce SQL best practices.
+
+```
+uv run sqlfluff lint dbt/sample_project
+```
+```
+uv run sqlfluff fix dbt/sample_project
+```
 
 ## Documentation & Automation
 ### mkdocs
@@ -181,17 +215,7 @@ How release-please works, Release PR generation, Changelog generation, Git taggi
 ### Environment Promotion Model
 Dev → Test → Prod flow, Version-based promotion, Tag-driven deployments, Manual approval gates (Prod)
 ```
-feature branch
-    ↓
-main
-    ↓
-release PR
-    ↓
-git tag (vX.Y.Z)
-    ↓
-Test
-    ↓
-Production
+feature branch → main → release PR → git tag (vX.Y.Z) → Test → Production
 ```
 ### Environment Deployments
 ####  Dev
@@ -208,39 +232,15 @@ How to redeploy previous tag, Handling hotfixes, Emergency procedures
 - Immutable artifacts
 
 # Getting Started
+```
+choco install just
+```
+
 # Configuration
 
-# WIP
--------------------------------------------------------------------------
+# Links
+https://medium.com/the-data-movement/day-16-dbt-pre-commit-hooks-linting-enforcing-sql-quality-with-sqlfluff-dbt-pre-commit-7a5d0639312e
 
-https://docs.astral.sh/uv/
-https://docs.astral.sh/uv/guides/integration/github/#publishing-to-pypi
-https://packaging.python.org/en/latest/guides/section-build-and-publish/
-
-# mkdocs
-uv add --dev mkdocs mkdocstrings[python] mkdocs-material
-uv add --dev mkdocs-gen-files mkdocs-literate-nav mkdocs-section-index
-
-uv run mkdocs new .
-
-# precommit
-uv add --dev pre-commit
-uv run pre-commit run --all-files
-
-# ruff
-uv add --dev ruff
-
-# mypy
-# just
-choco install just
-
-# sqlfluff
-uv run sqlfluff lint dbt/sample_project
-uv run sqlfluff fix dbt/sample_project
-
-# ci/cd
-
-## aws
 https://docs.databricks.com/aws/en/repos/get-access-tokens-from-git-provider
 https://docs.databricks.com/aws/en/dev-tools/auth/oauth-federation-policy#configure-workload
 https://docs.databricks.com/aws/en/dev-tools/ci-cd/github
@@ -249,29 +249,5 @@ https://github.com/databricks/setup-cli
 
 https://www.youtube.com/watch?v=XumUXF1e6RI
 
-
-# dbt
-
-from root:
----
-uv run dbt run `
-  --project-dir dbt/sample_project `
-  --profiles-dir .dbt
-
-uv run dbt docs generate `
-  --project-dir dbt/sample_project `
-  --profiles-dir .dbt
-
-uv run dbt docs serve `
-  --project-dir dbt/sample_project `
-  --profiles-dir .dbt
-
-from project:
----
-uv run dbt run `
-  --profiles-dir ../../.dbt
-
-
-
-# links
-https://medium.com/the-data-movement/day-16-dbt-pre-commit-hooks-linting-enforcing-sql-quality-with-sqlfluff-dbt-pre-commit-7a5d0639312e
+https://docs.astral.sh/uv/guides/integration/github/#publishing-to-pypi
+https://packaging.python.org/en/latest/guides/section-build-and-publish/
