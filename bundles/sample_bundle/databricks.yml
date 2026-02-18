@@ -7,6 +7,8 @@ include:
   - variables.y*ml
 
 sync:
+  paths:
+    - "../../dbt/"
   exclude:
     - targets
 
