@@ -19,11 +19,3 @@ resources:
             notebook_path: ../src/sample_ntbk.ipynb
           max_retries: 0
           disable_auto_optimization: true
-          # environment_key: Default
-
-      # environments:
-      #   - environment_key: Default
-      #     spec:
-      #       environment_version: "4"
-      #       dependencies:
-      #         - ../dist/*.whl

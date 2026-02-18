@@ -10,6 +10,7 @@ resolution-markers = [
 members = [
     "dabs-template",
     "datagen",
+    "sample-package",
 ]
 
 [[package]]
@@ -367,6 +368,7 @@ source = { virtual = "." }
 dependencies = [
     { name = "datagen" },
     { name = "dbt-databricks" },
+    { name = "sample-package" },
 ]
 
 [package.dev-dependencies]
@@ -390,6 +392,7 @@ dev = [
 requires-dist = [
     { name = "datagen", editable = "packages/datagen" },
     { name = "dbt-databricks", specifier = ">=1.11.4" },
+    { name = "sample-package", editable = "packages/sample_package" },
 ]
 
 [package.metadata.requires-dev]
@@ -2118,6 +2121,11 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/87/44/90fa543014c45560cae1fffc63ea059fb3575ee6e1cb654562197e5d16fb/ruff-0.14.14-py3-none-win_amd64.whl", hash = "sha256:3dde1435e6b6fe5b66506c1dff67a421d0b7f6488d466f651c07f4cab3bf20fd", size = 11630486, upload-time = "2026-01-22T22:30:10.852Z" },
     { url = "https://files.pythonhosted.org/packages/9e/6a/40fee331a52339926a92e17ae748827270b288a35ef4a15c9c8f2ec54715/ruff-0.14.14-py3-none-win_arm64.whl", hash = "sha256:56e6981a98b13a32236a72a8da421d7839221fa308b223b9283312312e5ac76c", size = 10920448, upload-time = "2026-01-22T22:30:15.417Z" },
 ]
+
+[[package]]
+name = "sample-package"
+version = "0.1.0"
+source = { editable = "packages/sample_package" }
 
 [[package]]
 name = "secretstorage"
