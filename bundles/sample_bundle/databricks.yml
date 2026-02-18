@@ -9,3 +9,10 @@ include:
 sync:
   exclude:
     - targets
+
+artifacts:
+  default:
+    type: whl
+    build: uv build --all-packages --wheel --out-dir ../dist
+    files:
+      - source: ../dist/*.whl
