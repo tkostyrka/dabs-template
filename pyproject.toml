@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "datagen",
+    "sample-package",
     "dbt-databricks>=1.11.4",
 ]
 
@@ -23,6 +24,7 @@ members = [
 # -------------------------------
 [tool.uv.sources]
 datagen = { workspace = true }
+sample-package = { workspace = true }
 
 # ---------------------------------------------
 # Dev-only dependencies shared across repo
