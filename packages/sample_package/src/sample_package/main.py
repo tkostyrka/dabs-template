@@ -1,9 +1,15 @@
 """Placeholder docstring."""
 
+import argparse
 
-def main(message: str = "not provided") -> None:
+
+def main() -> None:
     """Print a greeting message from the datagen module."""
-    print(f"Hello from sample package! message: {message}")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--message", default="not provided")
+    args = parser.parse_args()
+
+    print(f"Hello from sample package! message: {args.message}")
 
 
 if __name__ == "__main__":
