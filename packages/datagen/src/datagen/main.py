@@ -1,9 +1,9 @@
 """Placeholder docstring."""
 
 
-def main() -> None:
+def main(message: str = "not provided") -> None:
     """Print a greeting message from the datagen module."""
-    print("Hello from datagen!")
+    print(f"Hello from sample package! message: {message}")
 
 
 if __name__ == "__main__":
