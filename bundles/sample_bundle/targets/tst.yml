@@ -15,6 +15,6 @@ targets:
         level: CAN_RUN
     variables:
       var_source_catalog: sample
-      var_catalog: xxx
-      var_schema: xxx
-      var_warehouse_id: xxx
+      var_catalog: second
+      var_schema: test
+      var_warehouse_id: 6915297f40611326

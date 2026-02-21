@@ -70,3 +70,8 @@ jobs:
           http_path: ${{ vars.DATABRICKS_HTTP_PATH }}
           catalog: ${{ vars.DBT_CATALOG }}
           schema: ${{ vars.DBT_SCHEMA }}
+
+      # Build static documentation using MkDocs
+      # Output goes to build/docs/
+      - name: mkdocs build
+        run: uv run mkdocs build
