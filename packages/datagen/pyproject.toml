@@ -6,6 +6,9 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = []
 
+[project.scripts]
+main = "datagen.main:main"
+
 # ---------------------------------------------
 # Build backend for packaging
 # ---------------------------------------------

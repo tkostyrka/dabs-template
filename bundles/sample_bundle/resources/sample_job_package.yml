@@ -9,10 +9,10 @@ resources:
         - task_key: run_wheel
           python_wheel_task:
             package_name: sample_package
-            entry_point: zzz
+            entry_point: main
             parameters:
-              - "--yyy"
-              - 123
+              - "--message"
+              - "executed using run_wheel task."
           environment_key: default
 
       environments:

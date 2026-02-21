@@ -8,6 +8,7 @@ include:
 
 sync:
   paths:
+    - "src/"
     - "../../dbt/"
   exclude:
     - targets

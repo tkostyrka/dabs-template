@@ -6,6 +6,9 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = []
 
+[project.scripts]
+main = "sample_package.cli.main:main"
+
 # ---------------------------------------------
 # Build backend for packaging
 # ---------------------------------------------
