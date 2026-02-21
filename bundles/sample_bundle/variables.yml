@@ -1,4 +1,6 @@
 variables:
+  var_source_catalog:
+    description: The name of the default sources catalog
   var_catalog:
     description: The name of the default catalog
   var_schema:

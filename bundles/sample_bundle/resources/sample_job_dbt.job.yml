@@ -11,8 +11,28 @@ resources:
         - name: schema
           default: ${var.var_schema}
 
+      environments:
+        - environment_key: default
+          spec:
+            client: "2"
+            dependencies:
+              - dbt-databricks>=1.8.0,<2.0.0
+
       tasks:
 
-        - task_key: notebook_task
-          notebook_task:
-            notebook_path: ../src/sample_ntbk.ipynb
+        - task_key: dbt
+          max_retries: 1
+          min_retry_interval_millis: 0
+
+          disable_auto_optimization: true
+          environment_key: default
+
+          dbt_task:
+            project_directory: ../../../dbt/sample_project
+            commands:
+            - dbt deps
+            - dbt seed
+            - 'dbt run --vars "source_catalog: ${var.var_source_catalog}"'
+            catalog: ${var.var_catalog}
+            schema: ${var.var_schema}
+            warehouse_id: ${var.var_warehouse_id}
