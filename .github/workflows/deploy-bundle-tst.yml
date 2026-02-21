@@ -30,9 +30,13 @@ jobs:
     environment: tst
 
     steps:
-      # Checkout repository source code
+    # Checkout repository source code
     - name: Checkout
       uses: actions/checkout@v4
+
+    # Setup Python + uv dependency manager
+    # (custom composite action in this repo)
+    - uses: ./.github/actions/uv-setup
 
       # Deploy Databricks Asset Bundle
       # Uses custom composite action wrapping `databricks bundle deploy`
