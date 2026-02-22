@@ -1,4 +1,4 @@
-name: '[tst]: databricks bundle deploy'
+name: '[tst]: deploy databricks bundle'
 
 on:
   push:
@@ -26,6 +26,7 @@ concurrency:
 
 jobs:
   deploy:
+    name: '[deploy] bundle'
     runs-on: ubuntu-latest
     environment: tst
 

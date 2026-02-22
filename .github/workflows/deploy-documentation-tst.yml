@@ -1,4 +1,4 @@
-name: '[tst]: documentation deploy'
+name: '[tst]: deploy documentation'
 
 on:
   push:
@@ -22,6 +22,7 @@ concurrency:
 
 jobs:
   build:
+    name: '[build] docs'
     runs-on: ubuntu-latest
     environment: tst
 
@@ -70,6 +71,7 @@ jobs:
           path: ${{ env.DOCS_OUTPUT_DIR }}/
 
   deploy:
+    name: '[deploy] docs'
     runs-on: ubuntu-latest
     needs: build
 
