@@ -1,7 +1,11 @@
 name: 'validation (code)'
 
 on:
-  # pull_request:
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - synchronize
   push:
     branches:
       - main
