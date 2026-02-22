@@ -2,10 +2,10 @@ name: dbt command (aws)
 description: "---"
 
 inputs:
-  dbt_project_dir:
-    description: "Path to the dbt project directory"
+  dbt_project_name:
+    description: "dbt project name"
     required: false
-    default: "dbt/sample_project"
+    default: "sample_project"
   dbt_command:
     description: Command to be executed
     default: compile
@@ -35,12 +35,35 @@ runs:
   using: 'composite'
   steps:
 
+    - name: Prepare dbt profile
+      shell: bash
+      run: |
+        mkdir -p .dbt/temporary
+
+        cat > .dbt/temporary/profiles.yml <<EOF
+        ${PROFILE_NAME}:
+          target: cicd
+          outputs:
+            cicd:
+              type: databricks
+              method: http
+              catalog: "{{ env_var('DBT_CATALOG') }}"
+              schema: "{{ env_var('DBT_SCHEMA') }}"
+              host: "{{ env_var('DATABRICKS_HOST') }}"
+              http_path: "{{ env_var('DATABRICKS_HTTP_PATH') }}"
+              auth_type: oauth
+              client_id: "{{ env_var('DATABRICKS_CLIENT_ID') }}"
+              client_secret: "{{ env_var('DATABRICKS_CLIENT_SECRET') }}"
+        EOF
+      env:
+        PROFILE_NAME: ${{ inputs.dbt_project_name }}
+
     - name: dbt command
       shell: bash
       run: |
         uv run dbt ${{ inputs.dbt_command }} \
-          --project-dir ${{ inputs.dbt_project_dir }} \
-          --profiles-dir .dbt/workflows \
+          --project-dir dbt/${{ inputs.dbt_project_name }} \
+          --profiles-dir .dbt/temporary \
           --target cicd
       env:
         DATABRICKS_CLIENT_ID: ${{ inputs.client_id }}

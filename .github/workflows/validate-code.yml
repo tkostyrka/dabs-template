@@ -1,7 +1,11 @@
 name: 'validation (code)'
 
 on:
-  # pull_request:
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - synchronize
   push:
     branches:
       - main
@@ -15,11 +19,12 @@ on:
 # Global workflow-level variables
 env:
   BUNDLE_DIR: bundles/sample_bundle
-  DBT_PROJECT_DIR: dbt/sample_project
+  DBT_PROJECT_NAME: sample_project
   DOCS_OUTPUT_DIR: build/docs
 
 jobs:
   validate:
+    name: '[validate]: code'
     runs-on: ubuntu-latest
     environment: tst
 
@@ -61,7 +66,7 @@ jobs:
         uses: ./.github/actions/dbt-command
         with:
           dbt_command: compile
-          dbt_project_dir: ${{ env.DBT_PROJECT_DIR }}
+          dbt_project_name: ${{ env.DBT_PROJECT_NAME }}
 
           client_id: ${{ secrets.DATABRICKS_CLIENT_ID }}
           client_secret: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
