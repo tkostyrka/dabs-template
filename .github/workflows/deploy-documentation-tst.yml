@@ -59,7 +59,7 @@ jobs:
       # so they are included in the final Pages artifact
       - name: dbt docs move
         run: |
-          mv ${{ env.DBT_PROJECT_NAME }}/target \
+          mv dbt/${{ env.DBT_PROJECT_NAME }}/target \
              ${{ env.DOCS_OUTPUT_DIR }}/dbt
 
       # Upload static site as GitHub Pages artifact
