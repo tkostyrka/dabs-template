@@ -100,7 +100,7 @@ Within each project, you will find, among other components:
 This structure ensures clear separation between projects, promotes maintainability, and supports consistent deployment across multiple environments.
 
 ### configuration
-[DAB configuration](.bundles/README.md)
+[DAB targets configuration](.bundles/README.md)
 
 ## uv
 > Package-Based Development over Notebook-Only Development
@@ -124,7 +124,7 @@ A framework for analytics engineering and transformation workflows. dbt allows y
 [Official Documentation](https://github.com/dbt-labs/dbt-core)
 
 ### configuration
-[dbt configuration](.dbt/README.md)
+[dbt profiles configuration](.dbt/README.md)
 
 # Tooling
 This template comes preconfigured with a set of tools to ensure code quality, reproducibility, and best practices for Databricks projects.
