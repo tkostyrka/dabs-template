@@ -47,3 +47,34 @@ sample_project:
 ## Important
 Developers must never commit their local `profiles.yml` file to the repository.
 This approach ensures that authentication methods based on passwords, secrets, or PAT tokens are not accidentally exposed in version control.
+
+# Running dbt Commands
+The structure of this repository requires running dbt in a specific way.
+
+**From the repository root:**
+```bash
+uv run dbt run --project-dir dbt/sample_project --profiles-dir .dbt
+```
+
+```bash
+uv run dbt docs serve --project-dir dbt/sample_project --profiles-dir .dbt
+```
+
+**From inside a project folder:**
+```bash
+uv run dbt run --profiles-dir ../../.dbt
+```
+
+You can also use the shortcut defined in just:
+```bash
+# Generic command template
+dbt command project:
+    uv run dbt {{command}} \
+      --project-dir dbt/{{project}} \
+      --profiles-dir .dbt
+```
+
+Then invoke it like this:
+```bash
+just dbt run sample_project
+```
