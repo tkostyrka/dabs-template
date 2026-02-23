@@ -1,12 +1,12 @@
 # dabs-template
 A template repository for building production-ready Databricks projects.
+
 It provides a recommended project structure, preconfigured support tools, and opinionated best practices for development, testing, CI/CD, and deployment across environments.
 
 This repository is intended to accelerate project setup and enforce consistency across teams.
 
 # Table of Contents
 - [Overview](#overview)
-  - [Purpose](#purpose)
   - [Engineering Principles](#engineering-principles)
   - [Scope](#scope)
   - [Target Use Cases](#target-use-cases)
@@ -33,16 +33,15 @@ This repository is intended to accelerate project setup and enforce consistency 
 - [Configuration](#configuration)
 
 # Overview
-## Purpose
 This repository serves as a standardized starting point for Databricks-based data projects. It reduces setup time and enforces engineering best practices from day one.
 
 ## Engineering Principles
 This repository is built around a set of core engineering principles that guide development, testing, deployment, and overall project structure. These principles are designed to ensure consistency, reproducibility, and high-quality delivery across all environments.
 
-- **Automation-First:** All deployments are fully automated, with no manual edits to workspaces. Infrastructure and jobs are defined as code to ensure reproducibility.
-- **Automated Documentation:** Project documentation is generated and versioned alongside the code, ensuring accuracy and eliminating reliance on external sources.
-- **Version-Driven Releases:** Releases are semantic versioned, promoted via tags, and deployed as immutable artifacts to guarantee traceability.
 - **Developer Experience:** Development workflows are standardized and reproducible, with automated validation, testing, and quality checks to maintain consistency and reduce errors.
+- **Automation-First:** All deployments are fully automated, with no manual edits to workspaces. Infrastructure and jobs are defined as code to ensure reproducibility.
+- **Documentation:** Project documentation is generated and versioned alongside the code, ensuring accuracy and eliminating reliance on external sources.
+- **Version-Driven Releases:** Releases are semantic versioned, promoted via tags, and deployed as immutable artifacts to guarantee traceability.
 
 ## Scope
 The template includes:
@@ -65,11 +64,11 @@ Additionally, the repository comes with preconfigured tools that help standardiz
 - GitHub Workflows for CI/CD automation
 
 ## Target Use Cases
-- Greenfield Databricks data projects (new data workloads built on an existing platform)
-- Migration from ad-hoc notebooks to structured repositories
-- Building dbt-based projects (analytics engineering workflows on Databricks)
-- Wrapping up existing Databricks Asset Bundles (DAB)-based projects and enhancing them with testing, CI/CD, code quality checks, and structured repository standards
-- Standardizing projects across the organization through adoption of an approved, reusable template
+- **Greenfield** Databricks data projects (new data workloads built on an existing platform)
+- **Migration** from ad-hoc notebooks to structured repositories
+- Building **dbt-based projects** (analytics engineering workflows on Databricks)
+- **Wrapping up existing Databricks Asset Bundles** (DAB)-based projects and enhancing them with testing, CI/CD, code quality checks, and structured repository standards
+- **Standardizing** projects across the organization through adoption of an approved, reusable template
 
 ## Non-Goals
 This template intentionally does **not** include:
