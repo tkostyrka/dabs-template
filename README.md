@@ -99,6 +99,9 @@ Within each project, you will find, among other components:
 
 This structure ensures clear separation between projects, promotes maintainability, and supports consistent deployment across multiple environments.
 
+### configuration
+[DAB targets configuration](.bundles/README.md)
+
 ## uv
 > Package-Based Development over Notebook-Only Development
 A modern Python package, project, and environment manager written in Rust. UV combines dependency management, virtual environment creation, and tool execution in a single fast CLI. It uses a universal lockfile to ensure reproducible installs across machines and environments.
@@ -120,28 +123,8 @@ A framework for analytics engineering and transformation workflows. dbt allows y
 
 [Official Documentation](https://github.com/dbt-labs/dbt-core)
 
-from root:
-```
-uv run dbt run `
-  --project-dir dbt/sample_project `
-  --profiles-dir .dbt
-```
-```
-uv run dbt docs generate `
-  --project-dir dbt/sample_project `
-  --profiles-dir .dbt
-```
-```
-uv run dbt docs serve `
-  --project-dir dbt/sample_project `
-  --profiles-dir .dbt
-```
-
-from project:
-```
-uv run dbt run `
-  --profiles-dir ../../.dbt
-```
+### configuration
+[dbt profiles configuration](.dbt/README.md)
 
 # Tooling
 This template comes preconfigured with a set of tools to ensure code quality, reproducibility, and best practices for Databricks projects.

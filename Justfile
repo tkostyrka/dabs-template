@@ -1,7 +1,7 @@
 checkout branch:
     git checkout main
     git pull
-    git checkout -b "{{branch}}"
+    git checkout -b {{branch}}
     git push
 
 commit msg:
@@ -14,3 +14,8 @@ commit msg:
 validate:
     uv run pre-commit run --all-files
     uv run pytest
+
+dbt command project:
+    uv run dbt {{command}} \
+      --project-dir dbt/{{project}} \
+      --profiles-dir .dbt
