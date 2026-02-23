@@ -3,7 +3,7 @@ bundle:
 
 include:
   - resources/*.y*ml
-  - ../../.targets/*.y*ml
+  - ../../.bundles/*.y*ml
   - variables.y*ml
 
 sync:
