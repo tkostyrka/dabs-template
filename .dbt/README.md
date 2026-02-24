@@ -1,3 +1,5 @@
+[📖 Back to main README](/README.md)
+
 # dbt Profiles
 This folder contains the **dbt profiles** used by all dbt projects located in this repository.
 
