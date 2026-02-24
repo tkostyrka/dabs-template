@@ -7,7 +7,10 @@ This repository is intended to accelerate project setup and enforce consistency 
 
 # Table of Contents
 - [Overview](#overview)
-
+  - [Engineering Principles](#engineering-principles)
+  - [Scope](#scope)
+  - [Target Use Cases](#target-use-cases)
+  - [Non-Goals](#non-goals)
 
 - [Core Components](#core-components)
   - [Databricks Asset Bundles (DABs)](#databricks-asset-bundles-dabs)
@@ -83,24 +86,20 @@ This template intentionally does **not** include:
 ## Databricks Asset Bundles (DABs)
 *Databricks Asset Bundles are a tool to facilitate the adoption of software engineering best practices, including source control, code review, testing, and continuous integration and delivery (CI/CD), for your data and AI projects. Bundles provide a way to include metadata alongside your project's source files and make it possible to describe Databricks resources such as jobs and pipelines as source files. Ultimately a bundle is an end-to-end definition of a project, including how the project should be structured, tested, and deployed. This makes it easier to collaborate on projects during active development.*
 
-[Documentation](https://docs.databricks.com/aws/en/dev-tools/bundles/)
+[Official Documentation](https://docs.databricks.com/aws/en/dev-tools/bundles/)
 
-### projects
-[DAB projects](bundles/README.md)
+The Databricks Asset Bundle projects form the core of this repository. They are stored in the bundles subfolder, where each project has its own dedicated directory.
 
-### central configuration
-[DAB configuration (targets)](.bundles/README.md)
+Within each project, you will find, among other components:
+- **Notebook** definitions – containing the source code and logic executed within Databricks.
+- **Databricks Workflows** definitions – describing job orchestration, task dependencies, scheduling, and execution settings.
+- **Targets** – used to configure the destination environments (e.g., development, staging, production) where the project will be deployed and installed.
+- **Variables** (`variables.yml`) – enabling project parameterization, allowing environment-specific values and configuration to be managed in a flexible and reusable way.
 
-## dbt
-A framework for analytics engineering and transformation workflows. dbt allows you to define transformations as modular SQL models, test data quality, and manage dependencies between models. It integrates with Databricks to orchestrate transformations and maintain a clean, versioned data pipeline.
+This structure ensures clear separation between projects, promotes maintainability, and supports consistent deployment across multiple environments.
 
-[Documentation](https://github.com/dbt-labs/dbt-core)
-
-### projects
-[dbt projects](dbt/README.md)
-
-### central configuration
-[dbt configuration (profiles)](.dbt/README.md)
+### configuration
+[DAB targets configuration](.bundles/README.md)
 
 ## uv
 > Package-Based Development over Notebook-Only Development
@@ -117,6 +116,14 @@ It also significantly improves:
 - **Code quality and linting** – standard tooling (e.g., linters, formatters, static analysis) can be applied consistently.
 - **Portability and reusability** – packages can be reused across multiple projects without copying notebook code.
 - **Maintainability** – structured codebases are easier to extend, refactor, and debug over time.
+
+## dbt
+A framework for analytics engineering and transformation workflows. dbt allows you to define transformations as modular SQL models, test data quality, and manage dependencies between models. It integrates with Databricks to orchestrate transformations and maintain a clean, versioned data pipeline.
+
+[Official Documentation](https://github.com/dbt-labs/dbt-core)
+
+### configuration
+[dbt profiles configuration](.dbt/README.md)
 
 # Tooling
 This template comes preconfigured with a set of tools to ensure code quality, reproducibility, and best practices for Databricks projects.
