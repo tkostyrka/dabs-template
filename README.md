@@ -77,24 +77,16 @@ This template intentionally does **not** include:
 ## Databricks Asset Bundles (DABs)
 *Databricks Asset Bundles are a tool to facilitate the adoption of software engineering best practices, including source control, code review, testing, and continuous integration and delivery (CI/CD), for your data and AI projects. Bundles provide a way to include metadata alongside your project's source files and make it possible to describe Databricks resources such as jobs and pipelines as source files. Ultimately a bundle is an end-to-end definition of a project, including how the project should be structured, tested, and deployed. This makes it easier to collaborate on projects during active development.*
 
-[Documentation](https://docs.databricks.com/aws/en/dev-tools/bundles/)
-
-### projects
-[DAB projects](bundles/README.md)
-
-### central configuration
-[DAB configuration (targets)](.bundles/README.md)
+- **Official Documentation:** [link](https://docs.databricks.com/aws/en/dev-tools/bundles/)
+- **DAB projects:** [link](bundles/README.md)
+- **DAB configuration (targets):** [link](.bundles/README.md)
 
 ## dbt
 A framework for analytics engineering and transformation workflows. dbt allows you to define transformations as modular SQL models, test data quality, and manage dependencies between models. It integrates with Databricks to orchestrate transformations and maintain a clean, versioned data pipeline.
 
-[Documentation](https://github.com/dbt-labs/dbt-core)
-
-### projects
-[dbt projects](dbt/README.md)
-
-### central configuration
-[dbt configuration (profiles)](.dbt/README.md)
+- **Official Documentation:** [link](https://github.com/dbt-labs/dbt-core)
+- **dbt projects:** [link](dbt/README.md)
+- **dbt configuration (profiles):** [link](.dbt/README.md)
 
 ## uv
 > Package-Based Development over Notebook-Only Development
