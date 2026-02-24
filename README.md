@@ -6,34 +6,21 @@ It provides a recommended project structure, preconfigured support tools, and op
 This repository is intended to accelerate project setup and enforce consistency across teams.
 
 # Table of Contents
+
 - [Overview](#overview)
-  - [Engineering Principles](#engineering-principles)
-  - [Scope](#scope)
-  - [Target Use Cases](#target-use-cases)
-  - [Non-Goals](#non-goals)
-
 - [Core Components](#core-components)
-  - [Databricks Asset Bundles (DABs)](#databricks-asset-bundles-dabs)
-  - [dbt](#dbt)
-  - [uv](#uv)
-
 - [Tooling](#tooling)
-  - [Code Quality & Linting](#code-quality--linting)
-  - [Documentation & Automation](#documentation--automation)
-  - [Testing](#testing)
-
 - [Development & Deployment Lifecycle](#development--deployment-lifecycle)
-  - [Development Workflow](#development-workflow)
-  - [Versioning & Release Management](#versioning--release-management)
-  - [CI/CD & Environment Promotion](#cicd--environment-promotion)
-  - [Release Governance Principles](#release-governance-principles)
-
 - [Getting Started](#getting-started)
-
 - [Configuration](#configuration)
 
 # Overview
 This repository serves as a standardized starting point for Databricks-based data projects. It reduces setup time and enforces engineering best practices from day one.
+
+- [Engineering Principles](#engineering-principles)
+- [Scope](#scope)
+- [Target Use Cases](#target-use-cases)
+- [Non-Goals](#non-goals)
 
 ## Engineering Principles
 This repository is built around a set of core engineering principles that guide development, testing, deployment, and overall project structure. These principles are designed to ensure consistency, reproducibility, and high-quality delivery across all environments.
@@ -83,6 +70,10 @@ This template intentionally does **not** include:
 > Workspace(s), Unity Catalog (if used), networking, identity configuration, and base infrastructure must be in place before using this repository.
 
 # Core Components
+- [Databricks Asset Bundles (DABs)](#databricks-asset-bundles-dabs)
+- [dbt](#dbt)
+- [uv](#uv)
+
 ## Databricks Asset Bundles (DABs)
 *Databricks Asset Bundles are a tool to facilitate the adoption of software engineering best practices, including source control, code review, testing, and continuous integration and delivery (CI/CD), for your data and AI projects. Bundles provide a way to include metadata alongside your project's source files and make it possible to describe Databricks resources such as jobs and pipelines as source files. Ultimately a bundle is an end-to-end definition of a project, including how the project should be structured, tested, and deployed. This makes it easier to collaborate on projects during active development.*
 
@@ -123,6 +114,11 @@ It also significantly improves:
 
 # Tooling
 This template comes preconfigured with a set of tools to ensure code quality, reproducibility, and best practices for Databricks projects.
+
+- [Code Quality & Linting](#code-quality--linting)
+- [Documentation & Automation](#documentation--automation)
+- [Testing](#testing)
+
 ## Code Quality & Linting
 ### pre-commit
 A framework to manage and maintain multi-language pre-commit hooks. It automatically runs linters, formatters, or custom scripts before code is committed to Git, preventing style or syntax issues from entering the repository.
@@ -159,6 +155,12 @@ A command runner for automating repetitive tasks. It defines project-specific ta
 A Python testing framework that supports unit, functional, and integration tests. Pytest provides a simple syntax for writing tests, powerful fixtures for setup/teardown, and extensive plugins for coverage, reporting, and mocking.
 
 # Development & Deployment Lifecycle
+
+- [Development Workflow](#development-workflow)
+- [Versioning & Release Management](#versioning--release-management)
+- [CI/CD & Environment Promotion](#cicd--environment-promotion)
+- [Release Governance Principles](#release-governance-principles)
+
 ## Development Workflow
 ### Branching Strategy
 ### Local Development Workflow
