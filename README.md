@@ -7,13 +7,13 @@ This repository is intended to accelerate project setup and enforce consistency 
 
 # Table of Contents
 - [Overview](#overview)
-  <details>
+  <!-- <details>
   <summary>Subsections</summary>
   - [Engineering Principles](#engineering-principles)
   - [Scope](#scope)
   - [Target Use Cases](#target-use-cases)
   - [Non-Goals](#non-goals)
-  </details>
+  </details> -->
 
 - [Core Components](#core-components)
   - [Databricks Asset Bundles (DABs)](#databricks-asset-bundles-dabs)
