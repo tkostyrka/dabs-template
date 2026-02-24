@@ -6,13 +6,17 @@ It provides a recommended project structure, preconfigured support tools, and op
 This repository is intended to accelerate project setup and enforce consistency across teams.
 
 # Table of Contents
+
 - [Overview](#overview)
+
 > <details>
 > <summary>Subsections</summary>
-  - [Engineering Principles](#engineering-principles)
-  - [Scope](#scope)
-  - [Target Use Cases](#target-use-cases)
-  - [Non-Goals](#non-goals)
+>
+> - [Engineering Principles](#engineering-principles)
+> - [Scope](#scope)
+> - [Target Use Cases](#target-use-cases)
+> - [Non-Goals](#non-goals)
+>
 > </details>
 
 - [Core Components](#core-components)
