@@ -7,10 +7,8 @@ This repository is intended to accelerate project setup and enforce consistency 
 
 # Table of Contents
 
-- [Overview](#overview)
-
 > <details>
-> <summary>sections</summary>
+> <summary>[Overview](#overview)</summary>
 >
 > - [Engineering Principles](#engineering-principles)
 > - [Scope](#scope)
