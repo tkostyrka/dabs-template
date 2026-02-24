@@ -10,7 +10,7 @@ This repository is intended to accelerate project setup and enforce consistency 
 - [Overview](#overview)
 
 > <details>
-> <summary>Subsections</summary>
+> <summary>sections</summary>
 >
 > - [Engineering Principles](#engineering-principles)
 > - [Scope](#scope)
@@ -19,21 +19,37 @@ This repository is intended to accelerate project setup and enforce consistency 
 >
 > </details>
 
-- [Core Components](#core-components)
-  - [Databricks Asset Bundles (DABs)](#databricks-asset-bundles-dabs)
-  - [dbt](#dbt)
-  - [uv](#uv)
+> <details>
+> <summary>sections</summary>
+>
+> - [Databricks Asset Bundles (DABs)](#databricks-asset-bundles-dabs)
+> - [dbt](#dbt)
+> - [uv](#uv)
+>
+> </details>
 
 - [Tooling](#tooling)
-  - [Code Quality & Linting](#code-quality--linting)
-  - [Documentation & Automation](#documentation--automation)
-  - [Testing](#testing)
 
-- [Development & Deployment Lifecycle](#development--deployment-lifecycle)
-  - [Development Workflow](#development-workflow)
-  - [Versioning & Release Management](#versioning--release-management)
-  - [CI/CD & Environment Promotion](#cicd--environment-promotion)
-  - [Release Governance Principles](#release-governance-principles)
+> <details>
+> <summary>Subsections</summary>
+>
+> - [Code Quality & Linting](#code-quality--linting)
+> - [Documentation & Automation](#documentation--automation)
+> - [Testing](#testing)
+>
+> </details>
+
+- [Development & Deployment Lifecycle](#development--development--deployment-lifecycle)
+
+> <details>
+> <summary>Subsections</summary>
+>
+> - [Development Workflow](#development-workflow)
+> - [Versioning & Release Management](#versioning--release-management)
+> - [CI/CD & Environment Promotion](#cicd--environment-promotion)
+> - [Release Governance Principles](#release-governance-principles)
+>
+> </details>
 
 - [Getting Started](#getting-started)
 
