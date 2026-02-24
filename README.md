@@ -88,7 +88,7 @@ This template intentionally does **not** include:
 
 [Documentation](https://docs.databricks.com/aws/en/dev-tools/bundles/)
 
-### projects
+<!-- ### projects
 [DAB projects](bundles/README.md)
 
 ### central configuration
@@ -103,7 +103,7 @@ A framework for analytics engineering and transformation workflows. dbt allows y
 [dbt projects](dbt/README.md)
 
 ### central configuration
-[dbt configuration (profiles)](.dbt/README.md)
+[dbt configuration (profiles)](.dbt/README.md) -->
 
 ## uv
 > Package-Based Development over Notebook-Only Development
