@@ -124,6 +124,7 @@ pre-commit is a framework for managing and maintaining Git hooks in a consistent
 - **Official Documentation:** [link](https://pre-commit.com/)
 
 **What is pre-commit responsible for?**
+
 `pre-commit` runs automated checks before a commit is created. These checks can include:
 
 - Code formatting such as Black
@@ -176,6 +177,7 @@ uv run pre-commit run --all-files
 - **Official Documentation:** [link](https://docs.astral.sh/ruff/)
 
 **What is Ruff responsible for?**
+
 Ruff helps ensure:
 
 - Consistent code style
@@ -188,6 +190,7 @@ Ruff helps ensure:
 It can also automatically fix many issues when run with the `--fix` flag.
 
 **Configuration in `pyproject.toml`**
+
 Ruff is configured in the `pyproject.toml` file under the `[tool.ruff]` section.
 
 Example configuration:
@@ -231,6 +234,7 @@ uv run ruff check src/module.py
 ```
 
 **Using Ruff with pre-commit**
+
 If integrated with pre-commit, Ruff runs automatically before each commit.
 A typical hook configuration looks like:
 
