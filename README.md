@@ -218,6 +218,7 @@ convention = "google"
 ```
 
 **Running Ruff manually**
+
 Check all files:
 ```bash
 uv run ruff check .
