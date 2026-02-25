@@ -30,6 +30,23 @@ This repository is built around a set of core engineering principles that guide 
 - **Documentation:** Project documentation is generated and versioned alongside the code, ensuring accuracy and eliminating reliance on external sources.
 - **Version-Driven Releases:** Releases are semantic versioned, promoted via tags, and deployed as immutable artifacts to guarantee traceability.
 
+## Promoted Concepts
+In addition to the core engineering principles, this repository actively promotes architectural and organizational concepts that improve scalability, maintainability, and long-term platform maturity.
+
+### Code as Packages
+Our template promotes an approach in which, instead of implementing multiple layers of logic across sequentially invoked notebooks, more advanced logic is cleanly wrapped into Python packages.
+
+This approach is much closer to established software engineering best practices. By encapsulating complex logic inside well-structured Python modules rather than chaining notebooks together, we achieve better separation of concerns and clearer architecture.
+
+It also significantly improves:
+- **Testability** – Python packages can be easily unit tested outside of Databricks.
+- **Code quality and linting** – standard tooling (e.g., linters, formatters, static analysis) can be applied consistently.
+- **Portability and reusability** – packages can be reused across multiple projects without copying notebook code.
+- **Maintainability** – structured codebases are easier to extend, refactor, and debug over time.
+
+### Analytics Engineering
+xxx
+
 ## Scope
 The template includes:
 - Databricks Asset Bundles configuration for job and resource deployment
@@ -89,22 +106,11 @@ A framework for analytics engineering and transformation workflows. dbt allows y
 - **dbt configuration (profiles):** [link](.dbt/README.md)
 
 ## uv
-> Package-Based Development over Notebook-Only Development
 A modern Python package, project, and environment manager written in Rust. UV combines dependency management, virtual environment creation, and tool execution in a single fast CLI. It uses a universal lockfile to ensure reproducible installs across machines and environments.
 
-[Official Documentation](https://docs.astral.sh/uv/)
+- **Official Documentation:** [link](https://docs.astral.sh/uv/)
 
-Our template promotes an approach in which, instead of implementing multiple layers of logic across sequentially invoked notebooks, more advanced logic is cleanly wrapped into Python packages.
-
-This approach is much closer to established software engineering best practices. By encapsulating complex logic inside well-structured Python modules rather than chaining notebooks together, we achieve better separation of concerns and clearer architecture.
-
-It also significantly improves:
-- **Testability** – Python packages can be easily unit tested outside of Databricks.
-- **Code quality and linting** – standard tooling (e.g., linters, formatters, static analysis) can be applied consistently.
-- **Portability and reusability** – packages can be reused across multiple projects without copying notebook code.
-- **Maintainability** – structured codebases are easier to extend, refactor, and debug over time.
-
-# Tooling
+# Auxiliary Tooling
 This template comes preconfigured with a set of tools to ensure code quality, reproducibility, and best practices for Databricks projects.
 
 - [Code Quality & Linting](#code-quality--linting)
@@ -113,14 +119,125 @@ This template comes preconfigured with a set of tools to ensure code quality, re
 
 ## Code Quality & Linting
 ### pre-commit
-A framework to manage and maintain multi-language pre-commit hooks. It automatically runs linters, formatters, or custom scripts before code is committed to Git, preventing style or syntax issues from entering the repository.
+pre-commit is a framework for managing and maintaining Git hooks in a consistent, repeatable way across a team. It automatically runs checks before code is committed, helping you catch issues early - before they reach CI/CD or production. Instead of relying only on pipelines to validate code quality, pre-commit shifts feedback left, giving developers instant validation directly in their local environment.
 
+**What is pre-commit responsible for?**
+
+`pre-commit` runs automated checks before a commit is created. These checks can include:
+
+- Code formatting such as Black
+- Linting such as Ruff or Flake8
+- Type checking such as mypy
+- Security scanning
+- Removing trailing whitespace
+- Validating YAML or JSON
+- Preventing large files from being committed
+- Running custom scripts
+
+If any hook fails:
+- The commit is blocked
+- You receive a clear error message
+- You fix the issue and try again
+
+This ensures:
+- Consistent code style across the project
+- Fewer CI failures
+- Cleaner Git history
+- Better collaboration in teams
+
+**How pre-commit works**
+
+1. Hooks are defined in a `.pre-commit-config.yaml` file.
+2. `pre-commit` installs Git hooks locally.
+3. On every `git commit`, the configured hooks run automatically.
+4. If checks pass, the commit succeeds.
+5. If checks fail, the commit is rejected.
+
+**Installation**
+
+Since `pre-commit` is already added to the project via `uv`, you only need to initialize it in your local repository.
+
+To install Git hooks locally run:
+```bash
+uv run pre-commit install
 ```
+
+This installs the Git hook into `.git/hooks/`. From this point on, pre-commit will automatically run on every git commit.
+
+To make sure everything works correctly, run all configured hooks against the entire repository:
+```bash
 uv run pre-commit run --all-files
 ```
 
 ### ruff
-An extremely fast Python linter and code checker. Ruff scans Python files for style violations, code smells, and errors with minimal overhead, providing a significant speed advantage over traditional linters like `flake8`.
+**Ruff** is an extremely fast Python linter and code checker. It scans Python files for style violations, code smells, import issues, and common errors with minimal overhead. It provides a significant speed advantage compared to traditional linters such as flake8. Ruff can replace multiple tools at once, including flake8, isort, pydocstyle, pycodestyle, and pyflakes. Because of its performance and broad rule support, it is well suited for large repositories and CI environments.
+
+**What is Ruff responsible for?**
+Ruff helps ensure:
+
+- Consistent code style
+- Correct import ordering
+- Detection of unused variables and imports
+- Identification of common Python errors
+- Docstring validation
+- Enforcement of selected linting standards
+
+It can also automatically fix many issues when run with the `--fix` flag.
+
+**Configuration in `pyproject.toml`**
+Ruff is configured in the `pyproject.toml` file under the `[tool.ruff]` section.
+
+Example configuration:
+
+```toml
+[tool.ruff]
+# Set maximum allowed line length to 100 characters
+line-length = 100
+
+[tool.ruff.lint]
+# Enable rule groups:
+# E = pycodestyle errors
+# F = pyflakes checks
+# I = import sorting rules
+# D = docstring validation rules
+select = ["E", "F", "I", "D"]
+
+# Ignore specific rule:
+# D104 = Missing docstring in public package
+ignore = ["D104"]
+
+[tool.ruff.lint.pydocstyle]
+# Enforce Google-style docstring convention
+convention = "google"
+```
+
+**Running Ruff manually**
+Check all files:
+```bash
+uv run ruff check .
+```
+
+Automatically fix issues where possible:
+```bash
+uv run ruff check . --fix
+```
+
+Check a specific file:
+```bash
+uv run ruff check src/module.py
+```
+
+**Using Ruff with pre-commit**
+If integrated with pre-commit, Ruff runs automatically before each commit.
+A typical hook configuration looks like:
+
+```yaml
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.5.0
+  hooks:
+    - id: ruff
+      args: [--fix]
+```
 
 ### mypy
 A static type checker for Python. Mypy analyzes your code for type consistency and helps catch type-related bugs before runtime, improving maintainability and developer confidence in large codebases.
