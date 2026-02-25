@@ -248,15 +248,86 @@ A typical hook configuration looks like:
 ```
 
 ### mypy
-A static type checker for Python. Mypy analyzes your code for type consistency and helps catch type-related bugs before runtime, improving maintainability and developer confidence in large codebases.
+**mypy** is a static type checker for Python. It analyzes your code for type consistency and helps catch type related bugs before runtime, improving maintainability and developer confidence in large codebases. mypy verifies that function arguments, return types, class attributes, and variables match their declared type hints. This is especially valuable in larger projects where implicit assumptions about types can easily introduce subtle bugs.
+
+**What is mypy responsible for?**
+
+mypy helps ensure:
+
+- Functions return the expected types
+- Arguments passed to functions match declared types
+- Variables are used consistently with their type annotations
+- Untyped or partially typed code is detected
+- Type safety is preserved across modules
+
+By enforcing type hints at development time, mypy reduces runtime surprises and improves refactoring safety.
+
+**Configuration in `pyproject.toml`**
+
+mypy is configured in the `pyproject.toml` file under the `[tool.mypy]` section.
+
+Example configuration:
+
+```toml
+[tool.mypy]
+
+# Only check files inside the packages directory
+files = ["packages/"]
+
+# Type check function bodies even if they do not have type annotations
+check_untyped_defs = true
+
+# Require all functions to have explicit type annotations
+disallow_untyped_defs = true
+
+# Treat top level packages as explicit package bases
+explicit_package_bases = true
+
+# Add additional paths where mypy should look for modules
+mypy_path = [
+    "packages/datagen/src"
+]
+```
+
+**Running mypy manually**
+
+Check configured files:
+```bash
+uv run mypy
+```
+
+Check a specific directory:
+```bash
+uv run mypy packages/
+```
+
+Check a specific file:
+```bash
+uv run mypy packages/datagen/src/module.py
+```
+
+**Using mypy with pre-commit**
+
+If integrated with pre-commit, mypy runs automatically before each commit, preventing type errors from entering the repository.
+
+Example configuration:
+
+```yaml
+- repo: https://github.com/pre-commit/mirrors-mypy
+  rev: v1.10.0
+  hooks:
+    - id: mypy
+```
+
+This ensures type safety is validated before code is committed.
 
 ### sqlfluff
 A SQL linter and formatter designed for consistent style and readability. It supports multiple SQL dialects, can automatically fix some style violations, and integrates into CI pipelines to enforce SQL best practices.
 
-```
+```bash
 uv run sqlfluff lint dbt/sample_project
 ```
-```
+```bash
 uv run sqlfluff fix dbt/sample_project
 ```
 
