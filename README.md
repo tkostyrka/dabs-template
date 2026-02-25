@@ -121,8 +121,9 @@ This template comes preconfigured with a set of tools to ensure code quality, re
 ### pre-commit
 pre-commit is a framework for managing and maintaining Git hooks in a consistent, repeatable way across a team. It automatically runs checks before code is committed, helping you catch issues early - before they reach CI/CD or production. Instead of relying only on pipelines to validate code quality, pre-commit shifts feedback left, giving developers instant validation directly in their local environment.
 
-**What is pre-commit responsible for?**
+- **Official Documentation:** [link](https://pre-commit.com/)
 
+**What is pre-commit responsible for?**
 `pre-commit` runs automated checks before a commit is created. These checks can include:
 
 - Code formatting such as Black
@@ -171,6 +172,8 @@ uv run pre-commit run --all-files
 
 ### ruff
 **Ruff** is an extremely fast Python linter and code checker. It scans Python files for style violations, code smells, import issues, and common errors with minimal overhead. It provides a significant speed advantage compared to traditional linters such as flake8. Ruff can replace multiple tools at once, including flake8, isort, pydocstyle, pycodestyle, and pyflakes. Because of its performance and broad rule support, it is well suited for large repositories and CI environments.
+
+- **Official Documentation:** [link](https://docs.astral.sh/ruff/)
 
 **What is Ruff responsible for?**
 Ruff helps ensure:
