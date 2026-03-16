@@ -454,11 +454,74 @@ A static site generator specifically for project documentation written in Markdo
 - **Official Documentation:** xxxx
 
 ### justfile
-A command runner for automating repetitive tasks. It defines project-specific tasks in a simple file format, allowing developers to run commands like building, testing, or deploying with a single `just` command.
+A command runner for automating repetitive tasks. Just defines project-specific commands in a simple file format, allowing developers to run workflows like building, testing, linting, and deploying with a single `just` command instead of remembering complex CLI invocations.
+
+**What is justfile responsible for?**
+
+justfile helps standardize:
+
+- Local development workflows (setup, linting, testing)
+- Deployment and bundle validation commands
+- Documentation generation
+- Release and versioning tasks
+- CI/CD pipeline steps
+- Tool invocation without requiring deep CLI knowledge
+
+By centralizing commands in a single file, justfile ensures consistency across the team and reduces cognitive load for developers.
+
+**Justfile Structure**
+
+Commands are defined in a `justfile` at the repository root:
+
+```just
+# Install pre-commit hooks
+install-hooks:
+  uv run pre-commit install
+
+# Run all linting and type checks
+lint:
+  uv run ruff check .
+  uv run mypy
+  uv run sqlfluff lint dbt/
+
+# Run all tests
+test:
+  uv run pytest
+
+# Run linting with automatic fixes
+lint-fix:
+  uv run ruff check . --fix
+  uv run sqlfluff fix dbt/
+
+# Validate bundle configuration
+validate-bundle:
+  databricks bundle validate -e dev
+```
+
+**Running commands**
+
+Execute any defined command:
+
+```bash
+just lint
+just test
+just lint-fix
+just validate-bundle
+```
+
+List all available commands:
+
+```bash
+just --list
+```
+
+**Using justfile with CI/CD**
+
+CI/CD workflows can reference justfile commands for consistency between local and pipeline execution, reducing discrepancies between development and automation environments.
 
 **external links**
 
-- **Official Documentation:** xxxx
+- **Official Documentation:** [link](https://github.com/casey/just)
 
 ## Testing
 ### pytest
