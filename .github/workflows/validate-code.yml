@@ -31,7 +31,7 @@ jobs:
     steps:
       # Checkout repository source code
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       # Setup Python + uv dependency manager
       # (custom composite action maintained in this repo)
