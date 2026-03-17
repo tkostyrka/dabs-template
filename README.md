@@ -94,19 +94,69 @@ This template intentionally does **not** include:
 ## Databricks Asset Bundles (DABs)
 *Databricks Asset Bundles are a tool to facilitate the adoption of software engineering best practices, including source control, code review, testing, and continuous integration and delivery (CI/CD), for your data and AI projects. Bundles provide a way to include metadata alongside your project's source files and make it possible to describe Databricks resources such as jobs and pipelines as source files. Ultimately a bundle is an end-to-end definition of a project, including how the project should be structured, tested, and deployed. This makes it easier to collaborate on projects during active development.*
 
-- **Official Documentation:** [link](https://docs.databricks.com/aws/en/dev-tools/bundles/)
+Detailed documentation can be found here:
 - **DAB projects:** [link](bundles/README.md)
 - **DAB configuration (targets):** [link](.bundles/README.md)
+
+**external links**
+
+- **Official Documentation:** [link](https://docs.databricks.com/aws/en/dev-tools/bundles/)
 
 ## dbt
 A framework for analytics engineering and transformation workflows. dbt allows you to define transformations as modular SQL models, test data quality, and manage dependencies between models. It integrates with Databricks to orchestrate transformations and maintain a clean, versioned data pipeline.
 
-- **Official Documentation:** [link](https://github.com/dbt-labs/dbt-core)
+**Integration with Databricks Asset Bundles**
+
+dbt jobs are orchestrated through DABs. The bundle configuration references dbt tasks that run model selection, testing, and refreshes as part of the deployment pipeline.
+
+Detailed documentation can be found here:
 - **dbt projects:** [link](dbt/README.md)
 - **dbt configuration (profiles):** [link](.dbt/README.md)
 
+**external links**
+
+- **Official Documentation:** [link](https://github.com/dbt-labs/dbt-core)
+
 ## uv
 A modern Python package, project, and environment manager written in Rust. UV combines dependency management, virtual environment creation, and tool execution in a single fast CLI. It uses a universal lockfile to ensure reproducible installs across machines and environments.
+
+**What is uv responsible for?**
+
+uv manages:
+
+- Python version selection and installation
+- Project dependencies and sub-dependencies
+- Virtual environment creation and management
+- Tool execution without polluting global environments
+- Lock file generation for reproducible builds across machines
+
+**Configuration in `pyproject.toml`**
+
+This repository uses uv with a workspace structure. Dependencies are defined in `pyproject.toml`:
+
+```toml
+[project]
+name = "dabs-template"
+version = "0.1.0"
+dependencies = [
+  "pyspark>=3.5.0",
+  ...
+]
+
+[tool.uv]
+# Workspace includes multiple packages
+workspace = [
+  { path = "packages/datagen" },
+  { path = "packages/etl" },
+  ...
+]
+```
+
+**Reproducibility**
+
+The `uv.lock` file ensures all developers and CI/CD pipelines use identical dependency versions, eliminating "works on my machine" issues.
+
+**external links**
 
 - **Official Documentation:** [link](https://docs.astral.sh/uv/)
 
@@ -120,8 +170,6 @@ This template comes preconfigured with a set of tools to ensure code quality, re
 ## Code Quality & Linting
 ### pre-commit
 pre-commit is a framework for managing and maintaining Git hooks in a consistent, repeatable way across a team. It automatically runs checks before code is committed, helping you catch issues early - before they reach CI/CD or production. Instead of relying only on pipelines to validate code quality, pre-commit shifts feedback left, giving developers instant validation directly in their local environment.
-
-- **Official Documentation:** [link](https://pre-commit.com/)
 
 **What is pre-commit responsible for?**
 
@@ -171,10 +219,12 @@ To make sure everything works correctly, run all configured hooks against the en
 uv run pre-commit run --all-files
 ```
 
+**external links**
+
+- **Official Documentation:** [link](https://pre-commit.com/)
+
 ### ruff
 **Ruff** is an extremely fast Python linter and code checker. It scans Python files for style violations, code smells, import issues, and common errors with minimal overhead. It provides a significant speed advantage compared to traditional linters such as flake8. Ruff can replace multiple tools at once, including flake8, isort, pydocstyle, pycodestyle, and pyflakes. Because of its performance and broad rule support, it is well suited for large repositories and CI environments.
-
-- **Official Documentation:** [link](https://docs.astral.sh/ruff/)
 
 **What is Ruff responsible for?**
 
@@ -246,6 +296,10 @@ A typical hook configuration looks like:
     - id: ruff
       args: [--fix]
 ```
+
+**external links**
+
+- **Official Documentation:** [link](https://docs.astral.sh/ruff/)
 
 ### mypy
 **mypy** is a static type checker for Python. It analyzes your code for type consistency and helps catch type related bugs before runtime, improving maintainability and developer confidence in large codebases. mypy verifies that function arguments, return types, class attributes, and variables match their declared type hints. This is especially valuable in larger projects where implicit assumptions about types can easily introduce subtle bugs.
@@ -321,26 +375,161 @@ Example configuration:
 
 This ensures type safety is validated before code is committed.
 
-### sqlfluff
-A SQL linter and formatter designed for consistent style and readability. It supports multiple SQL dialects, can automatically fix some style violations, and integrates into CI pipelines to enforce SQL best practices.
+**external links**
 
-```bash
-uv run sqlfluff lint dbt/sample_project
+- **Official Documentation:** xxxx
+
+### sqlfluff
+**sqlfluff** is a SQL linter and formatter designed for consistent style and readability across SQL and dbt models. It supports multiple SQL dialects (including Databricks SQL), automatically fixes style violations, and integrates into CI pipelines to enforce SQL best practices.
+
+**What is sqlfluff responsible for?**
+
+sqlfluff helps ensure:
+
+- Consistent SQL formatting and style
+- Proper indentation and spacing
+- Keyword capitalization standards
+- SQL syntax validation
+- dbt model SQL quality (when used with dbt projects)
+- Early detection of SQL anti-patterns
+
+**Configuration in this repository**
+
+sqlfluff is configured via `.sqlfluff` file with dialect set to Databricks and integrated into the pre-commit workflow:
+
+```ini
+[sqlfluff]
+dialect = databricks
 ```
+
+**Running sqlfluff manually**
+
+Lint dbt models:
 ```bash
-uv run sqlfluff fix dbt/sample_project
+uv run sqlfluff lint dbt/
 ```
+
+Automatically fix SQL style issues:
+```bash
+uv run sqlfluff fix dbt/
+```
+
+Lint specific files:
+```bash
+uv run sqlfluff lint dbt/models/staging/
+```
+
+**Using sqlfluff with pre-commit**
+
+When integrated with pre-commit, sqlfluff runs automatically on all SQL and dbt model files before each commit, ensuring consistent SQL quality across the repository. Sqlfluff hooks are defined in `.pre-commit-config.yaml`.
+
+```yaml
+repos:
+  - repo: local
+    hooks:
+      - id: sqlfluff-lint
+        name: sqlfluff lint via uv
+        entry: uv run sqlfluff lint dbt/sample_project
+        language: system
+        pass_filenames: false
+
+      - id: sqlfluff-fix
+        name: sqlfluff fix via uv
+        entry: uv run sqlfluff fix dbt/sample_project
+        language: system
+        pass_filenames: false
+```
+
+**external links**
+
+- **Official Documentation:** [link](https://docs.sqlfluff.com/)
+- **Databricks SQL Dialect:** [link](https://docs.sqlfluff.com/en/stable/reference/dialects.html#databricks)
 
 ## Documentation & Automation
 ### mkdocs
 A static site generator specifically for project documentation written in Markdown. MkDocs allows you to create searchable, versioned, and visually appealing documentation websites for your Databricks projects.
 
+**external links**
+
+- **Official Documentation:** xxxx
+
 ### justfile
-A command runner for automating repetitive tasks. It defines project-specific tasks in a simple file format, allowing developers to run commands like building, testing, or deploying with a single `just` command.
+A command runner for automating repetitive tasks. Just defines project-specific commands in a simple file format, allowing developers to run workflows like building, testing, linting, and deploying with a single `just` command instead of remembering complex CLI invocations.
+
+**What is justfile responsible for?**
+
+justfile helps standardize:
+
+- Local development workflows (setup, linting, testing)
+- Deployment and bundle validation commands
+- Documentation generation
+- Release and versioning tasks
+- CI/CD pipeline steps
+- Tool invocation without requiring deep CLI knowledge
+
+By centralizing commands in a single file, justfile ensures consistency across the team and reduces cognitive load for developers.
+
+**Justfile Structure**
+
+Commands are defined in a `justfile` at the repository root:
+
+```just
+# Install pre-commit hooks
+install-hooks:
+  uv run pre-commit install
+
+# Run all linting and type checks
+lint:
+  uv run ruff check .
+  uv run mypy
+  uv run sqlfluff lint dbt/
+
+# Run all tests
+test:
+  uv run pytest
+
+# Run linting with automatic fixes
+lint-fix:
+  uv run ruff check . --fix
+  uv run sqlfluff fix dbt/
+
+# Validate bundle configuration
+validate-bundle:
+  databricks bundle validate -e dev
+```
+
+**Running commands**
+
+Execute any defined command:
+
+```bash
+just lint
+just test
+just lint-fix
+just validate-bundle
+```
+
+List all available commands:
+
+```bash
+just --list
+```
+
+**Using justfile with CI/CD**
+
+CI/CD workflows can reference justfile commands for consistency between local and pipeline execution, reducing discrepancies between development and automation environments.
+
+**external links**
+
+- **Official Documentation:** [link](https://github.com/casey/just)
 
 ## Testing
 ### pytest
 A Python testing framework that supports unit, functional, and integration tests. Pytest provides a simple syntax for writing tests, powerful fixtures for setup/teardown, and extensive plugins for coverage, reporting, and mocking.
+
+**external links**
+
+- **Official Documentation:** xxxx
 
 # Development & Deployment Lifecycle
 
